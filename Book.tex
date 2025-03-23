@@ -1,0 +1,38 @@
+\documentclass[10pt, openany, english]{extbook}
+
+\input{config/settings}
+\input{config/book}
+
+\title{Constructing Mathematics}
+\date{\small Modified \today}
+\author{Tyler Wang}
+
+\begin{document}
+\maketitle
+\include{intro}
+
+\edef\mychapter{Contents}
+\tableofcontents
+
+%Chapters
+\fancyhead[L]{\textit{Chapter \thechapter}}
+
+\include{chapters/Logic}
+\include{chapters/SetTheory}
+\include{chapters/Functions}
+\include{chapters/Polynomial}
+\include{chapters/Inequality}
+\include{chapters/Exponential}
+\include{chapters/Complex}
+\include{chapters/RoC}
+
+\end{document}
+
+
+
+
+
+
+
+
+

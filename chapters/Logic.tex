@@ -1,0 +1,410 @@
+\edef\mychapter{Mathematical Logic}
+\edef\mychapterdate{\date}
+
+\chapter{\mychapter}
+
+\section{Formal Logic}
+To begin our mathematical journey, let's start by formalizing the notion of logic.
+If one ponders it deeply, math, at its core, is just a game of manipulating a finite set of symbols based on a given set of rules and procedures.
+So, let's begin by defining the following:
+
+An \textbf{alphebet} is a set of symbols that can consist of letters, numbers, arrows, mathematical symbols, etc.
+
+A \textbf{formula} is a string of symbols along with some rule of determining whether a given string is a valid formula.
+We called these valid formulae \textit{well-formed}.
+For example, if our alphabet consisted of the symbols $\{A,B,+\}$, we can say every valid formula in our system is a finite string where $A$ and $B$ are not adjacent.
+Hence, the following formulae are well-formed:
+$$A+B+, \quad A++B,$$
+and the following are not well-formed:
+$$ABA+AB, \quad A++BA.$$
+
+With these definitions out of the way, let's define the idea of a proof.
+Because we want our formal system to be as general as possible, our definition of a proof might not seem at first like a proof.
+But as we use these ideas to develop first propositional logic and then first-ordered logic, the motivation for such a definition might start to become more apparent.
+
+With that, we start by defining a \textbf{proof} to be an ordered list of formulae where each element is either given by an \textbf{axiom} or by a \textbf{rule of inference} from any previous statements.
+
+An \textbf{axiom} is a set of well-formed formulae.
+To help define an axiom, it is common to specify an \textbf{axiom schema}, which is a mechanical rule for determining whether a statement is an axiom.
+Continuing with our system as defined before, we can define the set
+$$\mathbb{A}=\{A+A,A+B, A+B, B+B\}$$
+to be the set of axioms.
+Alternatively, we define this set using an axiom schema by saying
+$$\textit{A formula is an axiom if it's of the form}$$
+$$a+b$$
+$$\textit{for $a,b=A$ or $a,b=B$}.$$
+
+Then, a \textbf{rule of inference} is a rule for assigning a certain set of formulas to the new formula.
+As an example, let's define the following rule in our system:
+$$\textit{From } A+A \text{ and } B+B, \textit{ infer } +.$$
+Taking all of this, we could construct the following proof:
+\begin{enumerate}[label=(\arabic*)]
+	\item B+B
+	\item A+B
+	\item A+A
+	\item +
+\end{enumerate}
+where (1), (2), and (3) are from our axioms, and (4) is inferred by our rule of inference.
+
+Finally, the formula listed at the end of a proof is a \textbf{theorem}, where the entire proof can be denoted as the proof of said theorem.
+Our previous example can be thought of as the proof for the theorem $+$.
+
+\section{Propositional Logic}
+Now that we have formalized the notion of logic, let's start to actually do something a bit more useful.
+Due to the generality of a formal system of logic, without additional structure, it's really hard to make sense of just some arbitrary system.
+For example, in our preceding section, we made no mention of the notion of truth, which should be a core concept in any logic system that does anything mathematical.
+
+\subsection{Seeking Motivation}
+In this section, we will start by using our intuition to understand how we want to build our formal system in a way that fits our perception of reality.
+After all, a system that resembles very little what we might think may be of little use in our journey to formalize \textit{human} thought.
+
+Let's start by examining the properties of manipulating simple true/false expressions.
+When examining true/false statements, our variables only evaluate to two outcomes; it's often convenient to prove theorems or define operations in what's called a \textbf{truth table}.
+Let's show this by defining the operators we seek to use in this way.
+
+First, we define the \textbf{conjuction} operator, denoted as $p\wedge q$ where $p,q$ are variables that either evaluate as T or F. As seen in figure \eqref{fig:conjunction}, the possible evaluations of $p$ are listed in the leftmost column.
+Similarly, the middle column lists the possible evaluations of $q$.
+The rightmost column lists the evaluations of $p\wedge q$, given the evaluations of $p$ and $q$ in the same row.
+
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{ |c|c|c| }
+		\hline
+		$p$ & $q$ & $p\wedge q$ \\
+		\hline
+		T & T & T \\
+		\hline
+		T & F & F\\
+		\hline
+			F & T & F\\
+		\hline
+		F & F & F\\
+		\hline
+	\end{tabular}
+	\caption{}
+	\label{fig:conjunction}	
+\end{figure}
+
+As such, examining the truth table, one finds that the conjunction operator functions eerily similarly to \textit{and} in the English language.
+This is no mistake as the word \textit{and} can be thought of as the conjunction operator in the English language.
+
+Next, we can define the disjunction operator, denoted as $p\vee q$, which has the truth table given in figure \eqref{fig:disjunction}.
+As one might expect, disjunction is essentially the word \textit{or} in the English language.
+
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{ |c|c|c| }
+		\hline
+		$p$ & $q$ & $p\vee q$ \\
+		\hline
+		T & T & T \\
+		\hline
+		T & F & T\\
+		\hline
+		F & T & T\\
+		\hline
+		F & F & F\\
+		\hline
+	\end{tabular}
+	\caption{}
+	\label{fig:disjunction}	
+\end{figure}
+
+Finally, we define the negation operation, denoted as $\neg \, p$, which contrary to disjunction and conjunction, is a unary operator\footnote{
+Acting on one one input.}
+The truth table of negation is shown in figure \eqref{fig:negation} and, as one expects, is essentially the not operator.
+
+\begin{figure}[h]
+	\centering
+	\begin{tabular}{ |c|c| }
+		\hline
+		$p$  & $\neg \, p$ \\
+		\hline
+		T & F \\
+		\hline
+		F & T \\
+		\hline
+	\end{tabular}
+	\caption{}
+	\label{fig:negation}	
+\end{figure}
+
+We will, however, not be referring to these operators by their technical names and instead be referring to $p\vee q$ as \textbf{or}, $p\wedge q$ as \textbf{and}, and $\neg \, p$ as \textbf{not}.
+
+Now, let's examine the properties of these operations.
+First, we note that the binary operations are both \textbf{commutative} and \textbf{associative}.
+The truth tables for either are similar. Therefore, I only show \textbf{or} in figure \eqref{fig:com-aso-bool}.
+
+\begin{figure}[h]
+\centering
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		$p$ & $q$ & $p \vee q$ & $q \vee p$\\
+		\hline
+		T & T & T & T\\
+		\hline
+		T & F & T & T\\
+		\hline
+		F & T & T & T\\
+		\hline
+		F & F & F & F\\
+		\hline
+	\end{tabular}\\ [1em]
+	\begin{tabular}{|c|c|c|c|c|c|}
+		\hline
+		$p$ & $q$ & $r$ & $(p \vee q) \vee r$ & $p \vee (q \vee r)$\\
+		\hline
+		T & T & T & T & T\\
+		\hline
+		T & T & F & T & T\\
+		\hline
+		T & F & T & T & T\\
+		\hline
+		T & F & F & T & T\\
+		\hline
+		\multicolumn{5}{|c|}{\vdots}
+	\end{tabular}
+	\caption{}
+	\label{fig:com-aso-bool}
+\end{figure}
+
+For the binary operations, we notice that T and F act in a way like identity elements,
+$$p \vee \text{F} = p \jand  p \wedge \text{T} = p$$
+like the elements 0 and 1 do for addition and multiplication.
+Now, to this point, it seems more and more that the \textbf{or} and the \textbf{and} operators are operating more and more like addition and multiplication.
+
+Applying our observations that these operations operated quite similarly to addition and multiplication, we should expect 
+$$p\wedge (q \vee r) = (p\wedge q ) \vee (q \wedge r).$$
+If one were to construct these statements' truth tables, we would find they indeed match up.
+
+Now, whilst these parallels are nice, we have gotten to the point where this analogy starts to diverge.
+By constructing the truth table for
+$$p\vee (q \wedge r),$$
+one would find this is equivalent to the truth table for
+$$(p\vee q) \wedge (p\vee r)$$
+suggesting that $\vee$ \textit{also} distributes over $\wedge$.
+
+Up to this point, it seems that by interchanging every $\vee$ and $\wedge$, then every T and F, the truthfulness of an identity remains unchanged.
+If this statement were true, it would help us substantually, as if we establish some theorem, by simply interchaning the symbols, we would get another true statement.
+Well, with a stroke of luck, this is precisely the case for $\vee$ and $wedge$ in. Math, we called these relations \textbf{duality principles}, and when they exist, they become a very powerful tool.
+Without getting too specific with the definitions here, concepts are dual roughly when they are defined anti-symmetrically to each other.
+Thus, due to the symmetry, with the inverted parts reversed, the same proof may be repeated.
+
+In our case, $\wedge$ is \textit{dual} to $\vee$.
+The proof of this duality principle should be immediately obvious by observing our definitions for $\vee$ and $\wedge$:
+If we interchange T and F in the definition for $\vee$, we get the definition for $\wedge$ and vise versa.
+
+Interchanging T and F, we find $\vee$ can by defined in terms of $\wedge$ as follows:
+$$p \vee q = \neg (\neg p \wedge \neg q)\footnotemark$$
+Then by observing
+$$\neg \neg r = r$$
+for any $r$, we have the identity
+$$\neg (p\vee q) = \neg \neg (\neg p \wedge \neg q)= \neg p \wedge \neg q.$$
+This is what's known as \textbf{De Morgan's law}, and by duality, we also have
+$$\neg (p\wedge q) =\neg p \vee \neg q.$$
+
+\footnotetext{I should note, to simplify notation, we will be imposing an order of operations: Namely we evaluate $\neg$ before $\vee$ and $\wedge$ when parenthesis are not present.}
+
+After these, we have the complement law, which also comes in pairs, namely
+$$p \vee \neg p = \text{T}, \quad p \wedge \neg p = \text{F}.$$
+In some sense, we can describe $\neg$ as the \textit{inverse assigning} operator, similar to how $-$ assigns inverses with addition (ie $a+(-a)=0$), except the inverse assigning operator is the same for both operations by duality.
+
+Two remaining identities that are of importance are fairly trivial to see, and we won't go too in-depth into them. These results are the
+\begin{center}
+	\begin{tabular}{rl}
+	Idempotent Laws: & $p \vee p = p, \quad p \wedge p = p$, \\
+	Absorption Laws: & $p \vee (p \wedge q) = p \wedge (p \vee q) = p$.
+\end{tabular}
+\end{center}
+
+\subsection{Formalization}
+Now, let's take our observations and define a formal system that reproduces these properties.
+It might be good to stop at this time and first discuss why it might be a good idea to formalize logic.
+After all, isn't what we have above almost good enough for most purposes?\footnote{
+I say almost here since to actually describe math, we are still missing a few key pieces like quantifiers. We will discuss this soon.}
+
+Well, if we were to just stick with higher level structures,  like those seen in algebra or geometry, this is as far as we probably need to go in terms of \textit{formalizing} logic.
+However, defining propositional logic as a formal system also has its advantages.
+For one, by giving it a rigorous definition, one could treat propositional logic as a \textit{mathematical object}.
+Throughout this book, we will develop different methods to interpret and manipulate different mathematical objects to reveal hidden properties the said objects might have.
+As it turns out, understanding our underlying logic systems has very important applications in not just math but also computer science.
+Many studies in theoretical computer science emerge from the study of logical systems; as such, formalizing logic has become of great importance in the past century as computers have slowly started taking over the world.
+
+Now, with this side tangent out of the way, let's get back to describing what we did in the previous section, by instead in a formal setting.
+
+Whilst we could stick with our \textbf{or}, \textbf{and}, and \textbf{not} operators, as with convention, we usually just reduce this down to just two operators: Namely \textbf{not} and \textbf{implies} ($\to$), or more formaly, the \textbf{conditional} operator.
+
+As the name suggests, we should define this new operation in a way that closely resembles the word \textit{implies} in the English language.
+Moving back to our informal system of true/false statements, let's examine how we should define this operator.
+
+Let's take the statement
+$$\textit{Grey skies implies it rains tomorrow}.$$
+Examining when this statement is true, let us first suppose the first part of the statement is never true, hence
+$$\textit{The skies are never grey}.$$
+In this situation, it doesn't matter whether it rains tomorrow or not; the statement is \textbf{vacuously true} since the first part of the statement is never satisfied.
+
+Now, suppose we observe a grey sky; then, for the statement to be true, we would require it to rain the next day, or the statement becomes a false implication.
+
+With this observation in mind, we come up with the truth table as shown in figure \eqref{fig:truth-implies}.
+Comparing this with the truth table of $\neg \,p \vee q$, we can conclude:
+$$p \to q = \neg \,p \vee q.$$
+
+\begin{figure}[h]
+\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$p$ & $q$ & $p\to q$ \\
+		\hline
+		T & T & T \\
+		\hline
+		T & F & F \\
+		\hline
+		F & T & T \\
+		\hline
+		F & F & T \\
+		\hline
+	\end{tabular}
+	\caption{}
+	\label{fig:truth-implies}
+\end{figure}
+
+Now, suppose we had
+$$p \to q \jand q \to p,$$
+We could replace this with a single new operator, namely
+$$p \leftrightarrow q.$$
+When we have a conditional operator going in both directions, we call this in logic a \textbf{biconditional}.
+In plain English, we might call this relation \textbf{if and only if}; hence, we can restate the previous statement as
+$$p \textit{ if and only if } q.$$
+You can also interpret the biconditional operator as a sort of \textit{logical equivalence}.
+We are quite ready to discuss the notion of equivalence yet, but I introduce this terminology since in math, often you might hear the phrase \textit{the following are equivalent}, and I wanted to make sure I define it here.
+The biconditional has the truth table depicted in figure \eqref{fig:truth-biimplies}
+
+\begin{figure}[h]
+\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$p$ & $q$ & $p\leftrightarrow q$ \\
+		\hline
+		T & T & T \\
+		\hline
+		T & F & F \\
+		\hline
+		F & T & F \\
+		\hline
+		F & F & T \\
+		\hline
+	\end{tabular}
+	\caption{}
+	\label{fig:truth-biimplies}
+\end{figure}
+
+Now, we are ready to define propositional logic.
+First, we have our alphabet, which will consist of our alphanumeric characters, which each on their own will be a well-formed formula, called an \textbf{atomic formula};
+the symbols $\to$ and $\neg$, which will make up our \textbf{connectives};
+and brackets, as to enforce an order of operations.\footnote{
+We will stick with our previous convention of evaluation $\neg$ before $\to$ when parenthesis are not present.}
+
+We will define every atomic formula as well-formed.
+Then we can generate new formulae inductively from the following set of rules:
+\begin{enumerate}
+	\item If $p$ and $q$ are both well-formed, then $(p\vee q)$ is also well-formed,
+	\item If $p$ and $q$ are both well-formed, then $(p\wedge q)$ is also well-formed,
+	\item If $p$ is well-formed, then $\neg p$ is well-formed.
+\end{enumerate}
+Hence, the following formulae are well-formed:
+$$(p \to \neg q) \to \neg q, \quad p, \quad \neg p, \quad ...$$
+and the following are \textit{not} well-formed:
+$$(p \to \to q), \quad \neg \to p, \quad ...$$
+We will also impose that all well-formed formulae are finite.
+
+As for axioms, we will have three schemes, namely
+\begin{enumerate}[label=(A\arabic*), leftmargin=4em]
+	\item $\phi \to (\psi \to \phi)$
+	\item $[\phi \to (\psi \to \theta)] \to [(\phi \to  \psi) \to (\phi \to \theta)]$
+	\item $[(\neg \psi \to \neg \phi) \to (\phi \to \psi)]$
+\end{enumerate}
+where $\phi, \psi, \theta$ is any valid formula.
+
+The idea of defining these axioms is that we can provide proofs for true statements in our formal system when we use these.
+Now, we haven't determined what it means for a statement to be true or how notions of true and false fit into this model, but once we do, we would need to show that statements with proofs in this system are indeed true.
+Also, if we expect proved statements to be true, naturally, the axioms listed here must be true since a one-element proof with any of these axioms is a valid proof of the axiom.
+
+Then, for our rules of inference, we will have one, known by \textit{modus ponens}, which states
+$$\textit{Given } p \textit{ and } p \to q, \textit{ infer } q.$$
+
+Using our formal system, we can prove the following:
+
+\begin{thm}
+	For any valid formula $p$, $p\to p$ is a theorem in propositional logic.
+\end{thm}
+\begin{proof}
+	The formal proof for this formula goes as follows:
+	\begin{enumerate}
+		\item $p \to [(p \to p) \to p]$, by (A1)
+		\item $(p \to [ (p \to p) \to p]) \to ([p \to (p \to p)] \to (p \to p))$, by (A2)
+		\item $[p \to (p \to p)] \to (p \to p)$, by modus ponens
+		\item $p \to (p \to p)$, by (A1)
+		\item $p \to p$, by modus ponens.
+	\end{enumerate}
+\end{proof}
+
+%TODO add proofs of deduction, double negative, and proof by contradiction and contrapositive.
+
+\subsection{Interpretation of Truth}
+Now that we've defined how to manipulate and construct proofs in our formal system, let's provide our system with some meaning and discuss the notion of truth.
+In propositional logic, we generally deal with two types of statements, \textbf{tautologies} and \textbf{contradictions}.
+To define these terms, we need to discuss the \textbf{valuation} of propositional statements.
+
+A valuation is a rule for assigning truth values to formulae in propositional logic.
+We recall that each formula in our system can be defined inductively starting from our atomic formulae.
+A connective provides the means to construct new formulae from previous ones.
+Each connective has an associated truth table, which can be used to define the truth value of our new statement.
+Therefore, to consider the truth value of a statement, we require that a truth value be assigned to each atomic formula.
+
+We will define a valuation as the truth value of a statement under our system of true/false statements as defined in our previous section.
+By the above observation, we conclude it suffices to consider the valuation of a statement given the valuation of each of its atomic formulae.
+We will denote the valuation of a statement $\phi$ with $v_S(\phi)$, where $S$ is a rule for assigning valuations to each atomic formulae.\footnote{
+The notation that we've chosen here for valuation resembles the notation for a \textit{function}.
+This is no mistake since the valuation operation can be understood as a function taking propositional statements to either a value of true or false.}
+
+\begin{ex}
+	Let's consider the valuation of each of our axioms in propositional logic.
+	Let's draw our attention first to our first axiom. If $(p)$ and $(q)$ are atomic formulae, we can define our rule $S$ by letting
+	%TODO finish this example.
+	
+	\label{ex:val-axioms}
+\end{ex}
+
+If for every choice of $S$, the valuation of our statement under each $S$ is true, then we claim this statement is a tautology.
+Therefore, by example \eqref{ex:val-axioms}, we deduce that each of our axioms are tautologies.
+
+We define a contradiction as the dual concept to a tautology; if a statement has the valuation of false under any choice of $S$, we deduce this statement is a contradiction.
+
+In the remainder of this section, we will restrict our attention solely to the discussion of tautological formulae.
+
+Now, the natural question to ask is whether formulae that can be derived as proof are therefore also tautological.
+This is a remarkably non-trivial question since, in general, our rules of inference need not interact with valuation in any sensible way.
+In other words, formulae derived from our rules of inference need not be tautological for an arbitrary formal system.
+In addition, our axioms need not be tautologies which complicates matters even further.
+But, when statements derived from a proof are indeed tautologies, we say this formal system is \textbf{sound}.
+
+\begin{thm}
+	Propositional logic is sound.	
+\end{thm}
+\begin{proof}
+	We've already shown in example \eqref{ex:val-axioms} that our axioms are tautologies.
+	Thus, we check that modus ponens preserves tautologies.
+	
+	Suppose $p$ and $p \to q$ are both tautologies.
+	Then the result is immediate after examining the truth table in figure \eqref{fig:prop-sound}.
+	
+	With these two facts, we prove the soundness of propositional logic.
+	Suppose we have a theorem $p$ of length arbitrary length $N$.
+	
+\end{proof}
+
+
+
+
+
+

@@ -1,0 +1,46 @@
+Boolean algebra is the formal treatment of manipulating expressions that behave like evaluation true false statements.
+I could immediately list the axioms\footnotemark that define Boolean algebra, but I find this doesn't build the intuition for the motivation of such a construction.
+Instead, let's take a journey in uncovering some of the properties we want our system to have to adequately describe what we want to describe.
+
+\footnotetext{It's better to interpret an axiom here as a given set of rules assumed to be true in a mathematical system.
+In a later section, the way these rules may emerge as axioms by our previous definition will be made clearer.}
+
+\subsection{Defining Boolean Algebra}
+Now that we have analyzed our simple system of true/false statements, it's time to turn our attention to how this can motivate Boolean algebra.
+
+We would like our system to retain the properties of that our true/false statements observe, so we can interpret our system of true/false statements as a Boolean algebra.
+Now I must note here, while our true/false statement system is a boolean algebra, not \textit{all} Boolean algebras can be intereted as a true/false statement system.
+Boolean algebras are more general and can be scaled up to contain arbitrary elements.
+If this doesn't yet make sense, we will expand on it after we define our Boolean algebra.
+
+\begin{define}[Boolean Algerba]
+	Let $\mathcal{B}$ be a set. Then $(\mathcal{B}, \vee, \wedge, \neg)$ is a Boolean algebra if $\vee, \wedge, \neg$ are stable in $\mathcal{B}$ and the following are satified:
+		\begin{longtable}{lV{8em}V{8em}}
+			\textit{(a1)} \textbf{(Associative)} & 
+				$p \vee (q \vee r) = (p \vee q ) \vee r,$ &
+				$p \wedge (q \wedge r) = (p \wedge q ) \wedge r$ \\
+		
+			\textit{(a2)} \textbf{(Commutative)} &
+				$p \vee q = q \vee p,$ &
+				$p \wedge q = q \wedge p$ \\
+			
+			\textit{(a3)} \textbf{(Distributive)} &
+				$p \wedge (q\vee r) = (p \wedge q) \vee (p \wedge r),$ &
+				$p \vee (q\wedge r) = (p \vee q) \wedge (p \vee r),$\\
+			
+			\textit{(a4)} \textbf{(Identity)} &
+				$p \vee 0 = p,$ &
+				$p \wedge 1 = p$ \\
+				
+			\textit{(a5)} \textbf{(Complement)} &
+				$p \vee \neg p = 0,$ &
+				$p \wedge \neg p = 1$ \\
+				
+			\textit{(a6)} \textbf{(Absorbtion)} &
+				$p \vee (p \wedge q) = p,$ &
+				$p \wedge (p\vee q) = p$
+		\end{longtable}
+\end{define}
+
+Now, if you notice, I've replaced the symbol T with 0, and F with 1.
+I made these substitutions to highlight the fact that a Boolean algebra is not the same as our true/false statement system.
