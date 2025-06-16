@@ -10,7 +10,7 @@
 \usepackage[figurename=Figure]{caption}
 \usepackage{empheq}
 \usepackage{mdframed}
-\usepackage[b5paper, left=1.25in,right=1.25in,top=0.5in,bottom=0.5in,footskip=0.5in,includeheadfoot]{geometry}
+\usepackage[b5paper, left=1in,right=1in,top=0.5in,bottom=0.5in,footskip=0.75in,includeheadfoot]{geometry}
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{hyperref}
@@ -31,33 +31,42 @@
     }
 }
 
+\theoremstyle{definition}
 
-\newmdtheoremenv{lemma}{Lemma}
-\newmdtheoremenv{prop}{Proposition}
-\newmdtheoremenv{define}{Definition}
 \newmdtheoremenv{theorem}{Theorem}
-\newmdtheoremenv{thm}{Theorem}
-\newmdtheoremenv{cor}{Corollary}
+\newmdtheoremenv{lemma}[theorem]{Lemma}
+\newmdtheoremenv{prop}[theorem]{Proposition}
+\newmdtheoremenv{define}[theorem]{Definition}
+\newmdtheoremenv{thm}[theorem]{Theorem}
+\newmdtheoremenv{cor}[theorem]{Corollary}
 
-\numberwithin{lemma}{section}
-\numberwithin{equation}{section}
-\numberwithin{define}{section}
-\numberwithin{prop}{section}
-\numberwithin{figure}{section}
-\numberwithin{theorem}{section}
-\numberwithin{thm}{section}
-\numberwithin{cor}{section}
+\numberwithin{equation}{chapter}
+\numberwithin{theorem}{chapter}
+\numberwithin{figure}{chapter}
 
-\newcounter{ex}[section]
 \newenvironment{ex}[0]{
-	\refstepcounter{ex}
-    \subsection*{Example \theex .}
+	\refstepcounter{theorem}
+	\par
+	\noindent
+    \textbf{Example \thetheorem.}}
+    {\hfill$\spadesuit$
+    \par}
+\newenvironment{rem}[0]{
+	\refstepcounter{theorem}
+	\par
+	\noindent
+    \textbf{Remark \thetheorem.}}
+    {\par}
+
+\newenvironment{block}
+    {\begin{center}\begin{em}\small
+    \begin{tabular}{p{0.9\linewidth}}
     }
-    {
-    \hfill$\spadesuit$
-    \par
+    { 
+    \end{tabular}
+    \end{em}
+    \end{center}
     }
-\numberwithin{ex}{section}
 
 \def\real{\mathbb{R}}
 \def\complex{\mathbb{C}}

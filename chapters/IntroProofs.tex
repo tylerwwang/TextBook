@@ -1,0 +1,143 @@
+\setcounter{chapter}{-1}
+
+\edef\mychapter{Brief Introduction To Proofs}
+\edef\mychapterdate{March 31, 2025}
+
+\chapter{\mychapter}
+
+In this book, we will explore various mathematical topics through a proof-based approach. This may be quite different from what many students are accustomed to. For most students in America, their last encounter with anything resembling a proof was likely in geometry.
+
+I have included a brief introductory section to support those with less experience in proofs. However, students who are already comfortable with proof-based reasoning can skip this section without any loss of continuity.
+
+\section{Mathematical Statements}
+\subsection{The Basics}
+To talk about mathematics, we need to understand how to communicate thoughts in a standardized way.
+Normal language often includes plenty of ambiguity, which, for general communication, is fine, but in mathematics, this ambiguity is a source of trouble.
+To remedy this, mathematicians define words and sentence structures in a way that there can only be one interpretation.
+
+To begin, let's observe statements as seen in general language.
+The most general statement consists of \textit{subject} and a \textit{predicate}, generally seen in a sentence as a verb.
+Take the statement
+$$\textit{John walks}.$$
+In this statement, we have \textit{John} as the subject, and the predicate \textit{walks} describes something that he's doing.
+
+To expand this a bit, we can also add a direct object directly after the predicate and achieve a statement like
+$$\textit{John threw a ball},$$
+where in this statement, \textit{a ball} becomes the direct object.
+In some sense, we can describe the predicate as a phrase that describes the relation between several objects.\footnote{This, of course, is not the only way to see a predicate in a sentence, but I chose this interpretation due to its similarity to how a predicate is defined in math.}
+
+In math, the direct objects and subjects will be replaced by \textit{mathematical objects}, which are any object that we determine to have mathematical properties.
+Examples of this may be a \textit{number}, \textit{matrix}, \textit{set}, or even a \textit{mathematical statement} in some sense, as we will see in a later section.
+
+Then, like in traditional language, the job of a predicate is to relate all of these objects in a way that makes sense.
+An example of this is the equals sign with numbers, where one could write
+$$a=b$$
+where in this statement, $a$ and $b$ are mathematical objects, and $=$ is the predicate that relates $a$ and $b$.
+We could also construct the statement
+$$a \textit{ is odd}$$
+where here, $a$ would be our mathematical object, and the words \textit{is odd} becomes our predicate.
+
+Unlike words in normal language, mathematical objects and a mathematical predicate must all be \textit{well-defined}, or in other words, be given one precise and completely unambiguous definition.
+This makes the process of interpretation straightforward, in the sense that there is only one unambiguous way to interpret a mathematical statement.
+
+In mathematics, our primary goal is to distinguish between true and false statements. To achieve this, we must establish a well-defined system for assigning truth values to mathematical statements.
+Since our objects and predicates are well-defined, a truth-assignment procedure based on these definitions should yield unambiguous results --- provided the process itself is unambiguous.
+For example, if a statement was simultaneously determined to be both true and false, this would create a contradiction, as this would mean our statement has two conflicting interpretations, hence contradicting that everything is well-defined.
+
+Now, having defined the interpretation of truth, we can also introduce the notion of \textit{negation}.
+As one might suspect, a negation is essentially the English word not, and we will define the negation of a statement to be precisely true when the statement we are negating is false.
+For example, the negation of the statement
+$$a \textit{ is odd}$$
+It is true precisely when $a$ is not odd, or in other words, even.
+
+From here, one might suppose that given any statement, it or its negation must be true, since our truth assignment by our definition is well-defined.
+While under the most widely accepted schools of thought, this property indeed holds, there are still many prominent fields, mostly within theoretical computer science, that don't take this law.
+Since our definition of truth assignment was only required to be well-defined, we did not exclude the possibility that the process might not yield a result.
+
+\subsection{Quantifiers}
+Now mathematical statements with just objects and predicates, we can express many mathematical statements already.
+However, to make our system a bit more robust, there are still a few things we'd like it to include to expand its capabilities.
+For instance, let's say we want to construct a statement about not just a singular object, but rather a collection of objects.
+An example of this is let's say we want to make a statement about cars that's only true when \textit{every} car satisfies a given condition.
+In plain English, such a statement would read
+$$\textit{Every car is red.}$$
+Like before, \textit{is red} becomes the predicate of the statement.
+This time, we add the word \textit{every}, which lets us \textit{quantify} for which cars we need to check the property against to determine the truth value of the statement.
+The word \textit{every} is an example of a \textit{universal quantifier}, and we often represent it using the symbol $\forall$.
+Other examples of universal quantifiers are \textit{for all}, \textit{given any}, etc.
+For the purposes of math, all these mean the same thing.
+
+Opposite to the universal quantifier, we have the \textit{existential quantifiers}, often represented by the symbol $\exists$.
+As the name suggests, an existential quantifier only requires one element of the set to satisfy a given property to return a truth value of true.
+An example of the existential quantifier in action is
+$$\textit{There exists a car that is red.}$$
+
+In math, it turns out these are the only two quantifiers we need, and all other quantifiers that we might use in math that we see in natural language can be expressed as the combination of these quantifiers.
+
+But we've still left a bit of ambiguity in our statements.
+For example, the statement
+$$\textit{Every car is red}$$
+doesn't tell us what cars we need to check to determine the truthfulness of the statement.
+For this, we need a \textit{domain of discourse}, or some set for which our quantifiers will work over.
+In general day-to-day language, this domain of discourse can often be inferred through context, for example, if we stated the above statement at a parking lot, one could infer to check the truth value of the statement, the only cars we would have to check are the ones in the parking lot.
+Similar to natural language, the domain of discourse can often be inferred from the context.
+We will see this in effect in the subsequent section.
+
+\section{Methods of Proof}
+\subsection{Direct Proof}
+A direct proof, as the name suggests, is a method of proof where you deduce the conclusion directly from known statements.
+To explain this further, let's consider the following examples:
+
+\begin{ex}
+	Let's try to prove the statement
+	$$\textit{Every integer divisible by 4 is divisible by 2.}$$
+	
+	Before we start, let's examine what we need to check.
+	Immediately, we notice the statement includes an existential quantifier, meaning we need to check every object in the domain of discourse.
+	In this case, as clearly stated in the statement, the domain of discourse in question is the set of integers.
+	To show this statement is indeed true, we need to verify that any integer divisible by 4 is indeed divisible by 2.
+	With this in mind, the following is an example of what such a proof may look like:
+	\begin{block}
+		Let $n$ be an integer divisible by 4.
+		Then for some $k$, we have $n=4k$.
+		Then, since 4 is divisible by 2, we have
+		$$n=2(2k)$$
+		hence, $n$ is divisible by 2.
+	\end{block}	
+\end{ex}
+
+\begin{ex}
+	Let's prove the statement
+	$$\parbox{0.9\linewidth}{\begin{em}There exists an ordered pair $(x,y)$ satysfying the following system of equations:\end{em}}$$
+	$$2x+5y=12 \jand 3x+2y=7.$$
+	
+	This time, unlike before, we aim to prove a statement with an existential quantifier.
+	What this means is that for this statement to be true, we must show that at least one object within the domain of discourse has the given property.
+	In this case, using some basic algebra, we find the pair $(1,2)$ satisfies the equation, hence a proof of this statement may go as follows:
+	\begin{block}
+		Since
+		$$2(1)+5(2)=12 
+		\jand
+		3(1)+2(2)=7$$
+		hence the pair $(1,2)$ satisfies the given system of equations.\footnotemark
+	\end{block}
+	\footnotetext{With these types of proofs, how the example was found to satisfy the property is generally not important.
+			With this statement, the method for finding the example is well-understood, but finding examples in math in general is a mixture of some type of method along with plenty of guessing and luck.}
+\end{ex}
+
+\subsection{Proof by Contradiction}
+Another very common proof technique one encounters in math is proof by contradiction.
+As the name suggests, the goal of this proof technique is to derive a contradiction from the negation of
+\subsection{Proof by Contrapositive}
+
+
+
+
+
+
+
+
+
+
+
+
