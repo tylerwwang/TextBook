@@ -9,14 +9,18 @@
 
 \begin{document}
 \maketitle
+\pagenumbering{roman}
 \include{intro}
 
 \edef\mychapter{Contents}
 \tableofcontents
 
+
 %Chapters
 
-\fancyhead[L]{\textit{Chapter \thechapter}}
+
+
+\include{config/space}
 \include{chapters/IntroProofs}
 \include{chapters/Logic}
 \include{chapters/SetTheory}

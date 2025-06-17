@@ -16,12 +16,17 @@
 \usepackage{hyperref}
 \usepackage{wrapfig}
 \usepackage{enumitem}
-\usepackage{lastpage}
-\usepackage{zref-totpages}
 \usepackage{setspace}
 \usepackage{emptypage}
 \usepackage{multirow}
 \usepackage{enumitem}
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
 
 \usetikzlibrary{calc, backgrounds,angles, quotes}
 
