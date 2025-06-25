@@ -19,11 +19,16 @@ To remedy this, mathematicians define words and sentence structures in a way tha
 To begin, let's observe statements as seen in general language.
 The most general statement consists of \textit{subject} and a \textit{predicate}, generally seen in a sentence as a verb.
 Take the statement
-$$\textit{John walks}.$$
-In this statement, we have \textit{John} as the subject, and the predicate \textit{walks} describes something that he's doing.
+\begin{equation}
+	\textit{John walks}.
+	\label{eq:john-walks}
+\end{equation}
+In statement \eqref{eq:john-walks}, \textit{John} is the subject, and the predicate \textit{walks} describes something that John's doing.
 
 To expand this a bit, we can also add a direct object directly after the predicate and achieve a statement like
-$$\textit{John threw a ball},$$
+\begin{equation}
+	\textit{John threw a ball},
+\end{equation}
 where in this statement, \textit{a ball} becomes the direct object.
 In some sense, we can describe the predicate as a phrase that describes the relation between several objects.\footnote{This, of course, is not the only way to see a predicate in a sentence, but I chose this interpretation due to its similarity to how a predicate is defined in math.}
 
@@ -32,11 +37,16 @@ Examples of this may be a \textit{number}, \textit{matrix}, \textit{set}, or eve
 
 Then, like in traditional language, the job of a predicate is to relate all of these objects in a way that makes sense.
 An example of this is the equals sign with numbers, where one could write
-$$a=b$$
-where in this statement, $a$ and $b$ are mathematical objects, and $=$ is the predicate that relates $a$ and $b$.
+\begin{equation}
+	a=b.
+\end{equation}
+In this statement, $a$ and $b$ are mathematical objects, and $=$ is the predicate that relates $a$ and $b$.
+
 We could also construct the statement
-$$a \textit{ is odd}$$
-where here, $a$ would be our mathematical object, and the words \textit{is odd} becomes our predicate.
+\begin{equation}
+	a \textit{ is odd}
+\end{equation}
+where $a$ would be our mathematical object, and the words \textit{is odd} becomes our predicate.
 
 Unlike words in normal language, mathematical objects and a mathematical predicate must all be \textit{well-defined}, or in other words, be given one precise and completely unambiguous definition.
 This makes the process of interpretation straightforward, in the sense that there is only one unambiguous way to interpret a mathematical statement.
@@ -48,36 +58,108 @@ For example, if a statement was simultaneously determined to be both true and fa
 Now, having defined the interpretation of truth, we can also introduce the notion of \textit{negation}.
 As one might suspect, a negation is essentially the English word not, and we will define the negation of a statement to be precisely true when the statement we are negating is false.
 For example, the negation of the statement
-$$a \textit{ is odd}$$
-It is true precisely when $a$ is not odd, or in other words, even.
+\begin{equation}
+	a \textit{ is odd}
+\end{equation}
+is true precisely when $a$ is not odd, or in other words, even.
 
 From here, one might suppose that given any statement, it or its negation must be true, since our truth assignment by our definition is well-defined.
 While under the most widely accepted schools of thought, this property indeed holds, there are still many prominent fields, mostly within theoretical computer science, that don't take this law.
 Since our definition of truth assignment was only required to be well-defined, we did not exclude the possibility that the process might not yield a result.
 
+\subsection{Logical Operators}
+We can now understand statements in a more mathematically rigorous way. 
+Next, let's understand how we can connect these simple statements to express more complex ideas.
+This is where \textit{logical operator} comes in.
+In math, generally, we consider five: \textit{conjunction}, \textit{disjunction}, \textit{conditional}, \textit{equivilence}, and \textit{negation}.
+These words are really scary, but they all correspond to words in English that we all know so well in our day-to-day life.
+
+Conjunction and disjunction correspond to the words \textbf{and} and \textbf{or}\footnote{In math \textit{or} corresponds to \textit{inclusive or}, different from \textit{exclusive or} that is more common in normal language.
+What this all means is that \textit{or} in math corresponds more with the term \textit{and/or} that we would use in normal language.}
+ respectively.
+These operators work exactly as one would expect in language, and we shall consider the following examples:
+\begin{equation}
+	\textit{The car is red \textbf{and} the book is blue.}
+	\label{eq:and-statement}
+\end{equation}
+\begin{equation}
+	\textit{The house is black \textbf{or} the chair is brown.}
+	\label{eq:or-statement}
+\end{equation}
+Using common sense, statement \eqref{eq:and-statement} is only true when both the car and the book satisfy the given properties.
+Statement \eqref{eq:or-statement}, we only require one of the statements the be true.
+Of course, since \textit{or} in math is inclusive, if both statements are true, the entire statement remains true.
+
+The next operator we consider is the conditional.
+This time, the corresponding word is \textbf{implies}, or \textbf{if \dots then}.
+Let's consider the following example:
+\begin{equation}
+	\textit{\textbf{If} one can read, \textbf{then} one can write.}
+	\label{eq:implies-ex}
+\end{equation}
+If the first part of statement \eqref{eq:implies-ex} is true, then someone can read, for the entire statement to be true, using common sense, this person would need to know how to write.
+However, if someone can't read, but they can write, this statement is also true.
+If the first part of a conditional statement is never true, we call these statements \textit{vacuously true}.
+Now, if the first part of the statement were true, but the second part was false, we would have no choice but to deem this statement as untrue.
+
+The equivalence operator corresponds to the words \textbf{if and only if}, or \textbf{the following are equivalent}.
+As the name might suggest, statements are only equivalent when two statements are either both true or both false at every evaluation.
+Equivalently, we can consider two statements connected by the equivalence operator by considering two conditionals.
+For example, the following statement
+\begin{equation}
+	\textit{A stove is hot \textbf{if and only if} it is on}
+\end{equation}
+is true precisely when the statements
+\begin{equation}
+	\textit{A stove is hot \textbf{implies} it is on,}
+\end{equation}
+\begin{equation}
+	\textit{A stove is on \textbf{implies} it is hot}
+\end{equation}
+are true.
+
+The final operator we will consider is the \textit{negation}.
+It is actually the only \textit{unary} operator here (meaning it takes one argument).
+The word that corresponds to negation is \textbf{not}.
+For example, the statement
+\begin{equation}
+	\textit{It is \textbf{not} raining}
+\end{equation}
+is true precisely when the statement
+\begin{equation}
+	\textit{It is raining}
+\end{equation}
+is false.
+
 \subsection{Quantifiers}
-Now mathematical statements with just objects and predicates, we can express many mathematical statements already.
+Now, with mathematical statements consisting of just objects and predicates, we can already express many mathematical statements.
 However, to make our system a bit more robust, there are still a few things we'd like it to include to expand its capabilities.
 For instance, let's say we want to construct a statement about not just a singular object, but rather a collection of objects.
 An example of this is let's say we want to make a statement about cars that's only true when \textit{every} car satisfies a given condition.
 In plain English, such a statement would read
-$$\textit{Every car is red.}$$
+\begin{equation}
+	\textit{Every car is red.}
+\end{equation}
 Like before, \textit{is red} becomes the predicate of the statement.
 This time, we add the word \textit{every}, which lets us \textit{quantify} for which cars we need to check the property against to determine the truth value of the statement.
 The word \textit{every} is an example of a \textit{universal quantifier}, and we often represent it using the symbol $\forall$.
 Other examples of universal quantifiers are \textit{for all}, \textit{given any}, etc.
-For the purposes of math, all these mean the same thing.
+For math, all these mean the same thing.
 
 Opposite to the universal quantifier, we have the \textit{existential quantifiers}, often represented by the symbol $\exists$.
 As the name suggests, an existential quantifier only requires one element of the set to satisfy a given property to return a truth value of true.
 An example of the existential quantifier in action is
-$$\textit{There exists a car that is red.}$$
+\begin{equation}
+	\textit{There exists a car that is red.}
+\end{equation}
 
 In math, it turns out these are the only two quantifiers we need, and all other quantifiers that we might use in math that we see in natural language can be expressed as the combination of these quantifiers.
 
 But we've still left a bit of ambiguity in our statements.
 For example, the statement
-$$\textit{Every car is red}$$
+\begin{equation}
+	\textit{Every car is red}
+\end{equation}
 doesn't tell us what cars we need to check to determine the truthfulness of the statement.
 For this, we need a \textit{domain of discourse}, or some set for which our quantifiers will work over.
 In general day-to-day language, this domain of discourse can often be inferred through context, for example, if we stated the above statement at a parking lot, one could infer to check the truth value of the statement, the only cars we would have to check are the ones in the parking lot.
@@ -91,8 +173,9 @@ To explain this further, let's consider the following examples:
 
 \begin{ex}
 	Let's try to prove the statement
-	$$\textit{Every integer divisible by 4 is divisible by 2.}$$
-	
+	\begin{equation}
+		\textit{Every integer divisible by 4 is divisible by 2.}
+	\end{equation}
 	Before we start, let's examine what we need to check.
 	Immediately, we notice the statement includes an existential quantifier, meaning we need to check every object in the domain of discourse.
 	In this case, as clearly stated in the statement, the domain of discourse in question is the set of integers.
@@ -102,24 +185,30 @@ To explain this further, let's consider the following examples:
 		Let $n$ be an integer divisible by 4.
 		Then for some $k$, we have $n=4k$.
 		Then, since 4 is divisible by 2, we have
-		$$n=2(2k)$$
+		\begin{equation}
+			n=2(2k)
+		\end{equation}
 		hence, $n$ is divisible by 2.
 	\end{block}	
 \end{ex}
 
 \begin{ex}
 	Let's prove the statement
-	$$\parbox{0.9\linewidth}{\begin{em}There exists an ordered pair $(x,y)$ satysfying the following system of equations:\end{em}}$$
-	$$2x+5y=12 \jand 3x+2y=7.$$
+	\begin{gather}
+		\parbox{0.8\linewidth}{\begin{em}There exists an ordered pair $(x,y)$ satysfying the following system of equations:\end{em}} \nonumber \\ 
+		2x+5y=12 \jand 3x+2y=7.
+	\end{gather}
 	
 	This time, unlike before, we aim to prove a statement with an existential quantifier.
 	What this means is that for this statement to be true, we must show that at least one object within the domain of discourse has the given property.
 	In this case, using some basic algebra, we find the pair $(1,2)$ satisfies the equation, hence a proof of this statement may go as follows:
 	\begin{block}
 		Since
-		$$2(1)+5(2)=12 
-		\jand
-		3(1)+2(2)=7$$
+		\begin{equation}
+			2(1)+5(2)=12 
+			\jand
+			3(1)+2(2)=7
+		\end{equation}
 		hence the pair $(1,2)$ satisfies the given system of equations.\footnotemark
 	\end{block}
 	\footnotetext{With these types of proofs, how the example was found to satisfy the property is generally not important.
@@ -127,9 +216,95 @@ To explain this further, let's consider the following examples:
 \end{ex}
 
 \subsection{Proof by Contradiction}
-Another very common proof technique one encounters in math is proof by contradiction.
-As the name suggests, the goal of this proof technique is to derive a contradiction from the negation of
-\subsection{Proof by Contrapositive}
+Another common proof technique one encounters in math is proof by contradiction.
+As the name suggests, the goal of this proof technique is to derive a contradiction by supposing the statement is false.
+Using the assumption that the statement is false, we get that the negation of said statement must be true.
+Then, based on this, we can try to derive a contradiction.
+
+But of course, the following proof strategy requires that we know how to negate any statement, which turns out to be a non-trivial task for more complex statements.
+In this chapter, we will only work with relatively simple statements, and a more thorough treatment of statement negation will be included in the next chapter.
+
+\begin{ex}
+	In this example, we are going to try to prove the statement
+	\begin{equation}
+		\textit{Every prime integer greater than 2 is odd}.
+		\label{eq:prime-odd}
+	\end{equation}
+	To start, let's suppose this statement is false.
+	Then, if every prime integer greater than 2 isn't necessarily odd, we know there must exist such an example.
+	Hence the statement
+	\begin{equation}
+		\textit{There exists a prime integer greater than 2 that isn't odd.}
+		\label{eq:prime-odd-neg}
+	\end{equation}
+	is true precisely when the previous statement is false; hence, statement \eqref{eq:prime-odd-neg} is the negation of statement \eqref{eq:prime-odd}.
+	
+	Using these observations, the following is an example of a proof of this statement:
+	
+	\begin{block}
+		Suppose statement \eqref{eq:prime-odd} is false, hence statement \eqref{eq:prime-odd-neg} is true.
+		Then let $a$ be a prime integer (greater than 2) that is even.
+		Since $a$ is even, by definition of even, 2 must divide $a$. Since $a\neq 2$, $a$ must not be prime.
+		
+		Therefore, by contradiction, statement \eqref{eq:prime-odd} must hold.
+	\end{block}
+\end{ex}
+
+
+\begin{ex}
+	In this example, let's prove the statement
+	\begin{equation}
+		\textit{If } n^2 \textit{is odd, then } n \textit{ is odd}.
+	\end{equation}
+	If we assume this statement is false, then this would mean that there is some $n$ such that $n^2$ is odd and $n$ is even.
+	Taking this, we can derive a contradiction as we do in the following proof:
+	\begin{block}
+		Suppose there exists some even $n$ such that $n^2$ is odd.
+		Since $n$ is even, there exists some integer $k$ such that
+		\begin{equation}
+			n=2k.
+		\end{equation}
+		Therefore,
+		\begin{equation}
+			n^2 = (2k)^2 = 4k^2=2(2k^2),
+		\end{equation}
+		thus, we determine $n^2$ is also even, which is a contradiction of our assumption.\footnotemark
+	\end{block}
+\end{ex}
+\footnotetext{I should note that this is not the most optimal way to approach this problem.
+		It turns out that showing the negation of the second part of the conditional implies the negation of the first part is sufficient for proving this statement.
+		This is what we call proof by \textit{contrapositive}, and I'll leave a remark about it in the next chapter.}
+
+\begin{ex}
+	In this next example, let's prove the statement
+	\begin{equation}
+		\sqrt{2} \textit{ is irrational.}
+	\end{equation}
+	To prove this statement, let's suppose $\sqrt{2}$ is rational.
+	This means that there exist relatively prime integers\footnote{No common divisors.} $a, b$ such that $\sqrt{2}=\frac{a}{b}$.
+	We can formalize this in a proof in the following way:
+	
+	\begin{block}
+		Suppose $\sqrt{2}=\frac{a}{b}$.
+		Then, we require
+		\begin{equation}
+			2b^2=a^2
+		\end{equation}
+		thus, $a^2$ must be even.
+		Since the square of an integer is even if and only if the integer is even (since the multiplication of two odd numbers is odd), we require $a^2$ to be divisible by 4.
+		Therefore, for some integer $k$,
+		\begin{gather}
+			a^2 = 4k = 2b^2 \\
+			2k  = b^2
+		\end{gather}
+		This implies $b$ is even by the same reasoning.
+		This is a contradiction since we assumed $a$ and $b$ to be relatively prime.
+		Thus, we conclude $\sqrt{2}$ is irrational.
+	\end{block}
+\end{ex}
+
+\section{Exercises}
+
 
 
 
