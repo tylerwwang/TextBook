@@ -297,38 +297,27 @@ Let's start with the following definition
 \end{prop}
 \begin{proof}
 	Let's prove the proposition for the case $\nat \times \nat$.
-	By the following diagram
-	\[\begin{tikzcd}
-		& 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
-		1 & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
-		2 & \bullet & \bullet & \bullet & \bullet & \bullet \\
-		3 & \bullet & \bullet & \bullet & \bullet \\
-		4 & \bullet & \bullet & \bullet \\
-		5 & \bullet & \bullet \\
-		6 & \bullet \\
-		\vdots
-		\arrow[from=2-2, to=2-3]
-		\arrow[from=2-3, to=3-2]
-		\arrow[from=2-4, to=2-5]
-		\arrow[from=2-5, to=3-4]
-		\arrow[from=2-6, to=2-7]
-		\arrow[from=2-7, to=3-6]
-		\arrow[from=3-2, to=4-2]
-		\arrow[from=3-3, to=2-4]
-		\arrow[from=3-4, to=4-3]
-		\arrow[from=3-5, to=2-6]
-		\arrow[from=3-6, to=4-5]
-		\arrow[from=4-2, to=3-3]
-		\arrow[from=4-3, to=5-2]
-		\arrow[from=4-4, to=3-5]
-		\arrow[from=4-5, to=5-4]
-		\arrow[from=5-2, to=6-2]
-		\arrow[from=5-3, to=4-4]
-		\arrow[from=5-4, to=6-3]
-		\arrow[from=6-2, to=5-3]
-		\arrow[from=6-3, to=7-2]
-	\end{tikzcd}\]
-	where the first component is listed in the first column and the second component listed as the first row, following the arrows, we obtain a bijection between $\nat \times \nat \to \nat$.
+	By the diagram in \cref{fig:cart-countable}, we let each dot represent on ordered pair who's value is indicated by its row and column.
+	\begin{figure}[h]
+		\centering
+		\adjustbox{max width=0.8\linewidth}{
+			\begin{tikzcd}[ampersand replacement=\&,cramped]
+				\& 1 \& 2 \& 3 \& \dots \\
+				1 \& \bullet \& \bullet \& \bullet \& \dots \\
+				2 \& \bullet \& \bullet \\
+				3 \& \bullet \\
+				\vdots
+				\arrow[from=2-2, to=2-3]
+				\arrow[from=2-3, to=3-2]
+				\arrow[from=3-2, to=4-2]
+				\arrow[from=3-3, to=2-4]
+				\arrow[from=4-2, to=3-3]
+			\end{tikzcd}
+		}
+	\caption{}
+	\label{fig:cart-countable}
+	\end{figure}
+	Following the arrows, we obtain a bijection between $\nat \times \nat \to \nat$.
 
 	Then to prove the case where both sets are countably infinite, let $\i_X \to \nat$ and $\i_Y: Y \to \nat$ be injections.
 	The function defined by

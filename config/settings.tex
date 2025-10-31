@@ -23,6 +23,7 @@
 \usepackage{afterpage}
 \usepackage{cleveref}
 \usepackage{aliascnt}
+\usepackage{adjustbox}
 
 \newcommand{\blankpage}{%
     \null
@@ -81,6 +82,14 @@
   \renewcommand{\thefootnote}{#1}% Update footnote counter representation
   \footnotetext[0]{#2}}}
 
+\newcommand{\newmarkedtheorem}[1]{%
+  \newenvironment{#1}
+    {\renewcommand{\qedsymbol}{\ensuremath{\clubsuit}}\pushQED{\qed}\csname inner@#1\endcsname}
+    {\popQED\csname endinner@#1\endcsname}%
+  \newtheorem{inner@#1}%
+}
+
+\renewcommand\qedsymbol{$\blacksquare$}
 \theoremstyle{plain}
 
 \newtheorem{theorem}{Theorem}
@@ -90,47 +99,17 @@
 \newtheorem{thm}[theorem]{Theorem}
 \newtheorem{cor}[theorem]{Corollary}
 
+\theoremstyle{definition}
+
+\newmarkedtheorem{remark}[theorem]{Remark}
+\newmarkedtheorem{ex}[theorem]{Example}
+
+\newtheorem{exercise}{Exercise}
+
 \numberwithin{equation}{chapter}
 \numberwithin{theorem}{chapter}
 \numberwithin{figure}{chapter}
-
-\newaliascnt{example}{theorem}
-\aliascntresetthe{example}
-\crefname{example}{example}{examples}
-\newenvironment{ex}[0]{
-	\refstepcounter{example}
-	\par\noindent
-    \textbf{Example \theexample.}\ignorespaces%
-}{
-	\hfill$\spadesuit$
-    \par
-}
-
-\newaliascnt{remark}{theorem}
-\aliascntresetthe{remark}
-\crefname{remark}{remark}{remarks}
-\newenvironment{remark}[0]{
-	\refstepcounter{remark}
-	\par\noindent
-    \textbf{Remark \theremark.}\ignorespaces%
-}{
-	\hfill$\spadesuit$
-	\par
-}
-
-\newcounter{exercise}
-\newenvironment{exercise}[1][\unskip]{
-	\refstepcounter{exercise}%
-	\par\noindent
-    \textbf{Exercise \theexercise.\textsuperscript{#1}}\ignorespaces%
-}
-{\par}
 \numberwithin{exercise}{chapter}
-
-\newcommand{\exercisesection}{
-	\section{Exercises\textsuperscript{$\ddag$}}
-	\customfootnotetext{$\ddag$}{Difficult exercises will be identified with $\dagger$; Exercises that require optional sections are identified with $\star$}
-}
 
 \newcommand{\optionalsection}[1]{
 	\section{#1\textsuperscript{$\S$}}
@@ -142,8 +121,7 @@
     \begin{center}
     \begin{em}\small
     \begin{tabular}{p{0.9\linewidth}}
-}
-{
+}{
     \end{tabular}
     \end{em}
     \end{center}
@@ -154,3 +132,7 @@
 \crefname{figure}{figure}{figures}
 
 \allowdisplaybreaks
+
+\setlist{itemsep=1pt,topsep=1pt}
+
+\newenvironment{axiomlist}{\begin{enumerate}[label=(A\arabic*),leftmargin=4em]}{\end{enumerate}}
