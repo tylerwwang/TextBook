@@ -68,7 +68,7 @@ While under the most widely accepted schools of thought, this property indeed ho
 Since our definition of truth assignment was only required to be well-defined, we did not exclude the possibility that the process might not yield a result.
 
 \subsection{Logical Operators}
-We can now understand statements in a more mathematically rigorous way. 
+We can now understand statements in a more mathematically rigorous way.
 Next, let's understand how we can connect these simple statements to express more complex ideas.
 This is where \textit{logical operator} comes in.
 In math, generally, we consider five: \textit{conjunction}, \textit{disjunction}, \textit{conditional}, \textit{equivilence}, and \textit{negation}.
@@ -189,23 +189,23 @@ To explain this further, let's consider the following examples:
 			n=2(2k)
 		\end{equation}
 		hence, $n$ is divisible by 2.
-	\end{block}	
+	\end{block}
 \end{ex}
 
 \begin{ex}
 	Let's prove the statement
 	\begin{gather}
-		\parbox{0.8\linewidth}{\begin{em}There exists an ordered pair $(x,y)$ satysfying the following system of equations:\end{em}} \nonumber \\ 
+		\parbox{0.8\linewidth}{\begin{em}There exists an ordered pair $(x,y)$ satysfying the following system of equations:\end{em}} \nonumber \\
 		2x+5y=12 \jand 3x+2y=7.
 	\end{gather}
-	
+
 	This time, unlike before, we aim to prove a statement with an existential quantifier.
 	What this means is that for this statement to be true, we must show that at least one object within the domain of discourse has the given property.
 	In this case, using some basic algebra, we find the pair $(1,2)$ satisfies the equation, hence a proof of this statement may go as follows:
 	\begin{block}
 		Since
 		\begin{equation}
-			2(1)+5(2)=12 
+			2(1)+5(2)=12
 			\jand
 			3(1)+2(2)=7
 		\end{equation}
@@ -238,18 +238,17 @@ In this chapter, we will only work with relatively simple statements, and a more
 		\label{eq:prime-odd-neg}
 	\end{equation}
 	is true precisely when the previous statement is false; hence, statement \eqref{eq:prime-odd-neg} is the negation of statement \eqref{eq:prime-odd}.
-	
+
 	Using these observations, the following is an example of a proof of this statement:
-	
+
 	\begin{block}
 		Suppose statement \eqref{eq:prime-odd} is false, hence statement \eqref{eq:prime-odd-neg} is true.
 		Then let $a$ be a prime integer (greater than 2) that is even.
 		Since $a$ is even, by definition of even, 2 must divide $a$. Since $a\neq 2$, $a$ must not be prime.
-		
+
 		Therefore, by contradiction, statement \eqref{eq:prime-odd} must hold.
 	\end{block}
 \end{ex}
-
 
 \begin{ex}
 	In this example, let's prove the statement
@@ -272,8 +271,8 @@ In this chapter, we will only work with relatively simple statements, and a more
 	\end{block}
 \end{ex}
 \footnotetext{I should note that this is not the most optimal way to approach this problem.
-		It turns out that showing the negation of the second part of the conditional implies the negation of the first part is sufficient for proving this statement.
-		This is what we call proof by \textit{contrapositive}, and I'll leave a remark about it in the next chapter.}
+	It turns out that showing the negation of the second part of the conditional implies the negation of the first part is sufficient for proving this statement.
+	This is what we call proof by \textit{contrapositive}, and I'll leave a remark about it in the next chapter.}
 
 \begin{ex}
 	In this next example, let's prove the statement
@@ -283,7 +282,7 @@ In this chapter, we will only work with relatively simple statements, and a more
 	To prove this statement, let's suppose $\sqrt{2}$ is rational.
 	This means that there exist relatively prime integers\footnote{No common divisors.} $a, b$ such that $\sqrt{2}=\frac{a}{b}$.
 	We can formalize this in a proof in the following way:
-	
+
 	\begin{block}
 		Suppose $\sqrt{2}=\frac{a}{b}$.
 		Then, we require

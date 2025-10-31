@@ -62,7 +62,7 @@ Let's start by examining the properties of manipulating simple true/false expres
 When examining true/false statements, our variables only evaluate to two outcomes; it's often convenient to prove theorems or define operations in what's called a \textbf{truth table}.
 Let's show this by defining the operators we seek to use in this way.
 
-First, we define the \textbf{conjunction} operator, denoted as $p\wedge q$ where $p,q$ are variables that either evaluate as T or F. As seen in figure \eqref{fig:conjunction}, the possible evaluations of $p$ are listed in the leftmost column.
+First, we define the \textbf{conjunction} operator, denoted as $p\wedge q$, where $p,q$ are variables that either evaluate as T or F. As seen in figure \eqref{fig:conjunction}, the possible evaluations of $p$ are listed in the leftmost column.
 Similarly, the middle column lists the possible evaluations of $q$.
 The rightmost column lists the evaluations of $p\wedge q$, given the evaluations of $p$ and $q$ in the same row.
 
@@ -82,7 +82,7 @@ The rightmost column lists the evaluations of $p\wedge q$, given the evaluations
 		\hline
 	\end{tabular}
 	\caption{}
-	\label{fig:conjunction}	
+	\label{fig:conjunction}
 \end{figure}
 
 As such, examining the truth table, one finds that the conjunction operator functions eerily similarly to \textit{and} in the English language.
@@ -107,7 +107,7 @@ As one might expect, disjunction is essentially the word \textit{or} in the Engl
 		\hline
 	\end{tabular}
 	\caption{}
-	\label{fig:disjunction}	
+	\label{fig:disjunction}
 \end{figure}
 
 Finally, we define the negation operation, denoted as $\neg \, p$, which contrary to disjunction and conjunction, is a unary operator\footnote{
@@ -126,7 +126,7 @@ The truth table of negation is shown in figure \eqref{fig:negation} and, as one 
 		\hline
 	\end{tabular}
 	\caption{}
-	\label{fig:negation}	
+	\label{fig:negation}
 \end{figure}
 
 We will, however, not be referring to these operators by their technical names and instead be referring to $p\vee q$ as \textbf{or}, $p\wedge q$ as \textbf{and}, and $\neg \, p$ as \textbf{not}.
@@ -173,7 +173,7 @@ $$p \vee \text{F} = p \jand  p \wedge \text{T} = p$$
 like the elements 0 and 1 do for addition and multiplication.
 Now, to this point, it seems more and more that the \textbf{or} and the \textbf{and} operators are operating more and more like addition and multiplication.
 
-Applying our observations that these operations operated quite similarly to addition and multiplication, we should expect 
+Applying our observations that these operations operated quite similarly to addition and multiplication, we should expect
 $$p\wedge (q \vee r) = (p\wedge q ) \vee (q \wedge r).$$
 If one were to construct these statements' truth tables, we would find they indeed match up.
 
@@ -221,9 +221,9 @@ The two remaining identities that are of importance are fairly trivial to see, a
 Now, let's take our observations and define a formal system that reproduces these properties.
 It might be good to stop at this time and first discuss why it might be a good idea to formalize logic.
 After all, isn't what we have above almost good enough for most purposes?\footnote{
-I say almost here since to actually describe math, we are still missing a few key pieces, like quantifiers. We will discuss this soon.}
+I say almost here, since to actually describe math, we are still missing a few key pieces, like quantifiers. We will discuss this soon.}
 
-Well, if we were to just stick with higher-level structures,  like those seen in algebra or geometry, this is as far as we probably need to go in terms of \textit{formalizing} logic.
+Well, if we were to just stick with higher-level structures,  like those seen in algebra or geometry, this is as far as we probably need to go in terms of \textit{formalizing} logic, in fact, the remaining sections on propositional logic can be skipped with no loss of continuity (except for a few inconsequential examples).
 However, defining propositional logic as a formal system also has its advantages.
 For one, by giving it a rigorous definition, one could treat propositional logic as a \textit{mathematical object}.
 Throughout this book, we will develop different methods to interpret and manipulate different mathematical objects to reveal hidden properties that said objects might have.
@@ -272,7 +272,7 @@ Now, suppose we had
 $$p \to q \jand q \to p,$$
 We could replace this with a single new operator, namely
 $$p \leftrightarrow q.$$
-When we have a conditional operator going in both directions, we call this in logic a \textbf{biconditional}.
+When we have a conditional operator going in both directions, we call this in logic a \textbf{biconditional} or \textbf{equivalence}.
 In plain English, we might call this relation \textbf{if and only if}; hence, we can restate the previous statement as
 $$p \textit{ if and only if } q.$$
 You can also interpret the biconditional operator as a sort of \textit{logical equivalence}.
@@ -318,6 +318,16 @@ and the following are \textit{not} well-formed:
 $$(p \to \to q), \quad \neg \to p, \quad ...$$
 We will also impose that all well-formed formulae are finite.
 
+While not strictly a part of our formal system, we can use the symbols $\vee, \wedge$, and $\leftrightarrow$ to simplify our formulae.
+Namely, we define each of these symbols as follows:
+\begin{align}
+	\phi \vee \psi &:= \neg \phi \to \psi, \\
+	\phi \wedge \psi &:= \neg (\phi \to \neg \psi ), \label{eq:and-prop-def}\\
+	\phi \leftrightarrow \psi &:= \neg((\phi \to \psi) \to \neg (\psi \to \phi)).\footnotemark
+\end{align}
+\footnotetext{Of course we can translate the definition of $\phi \leftrightarrow \psi$  to $(\phi \to \psi) \wedge (\psi \to \phi)$ by applying equation \eqref{eq:and-prop-def}.}
+letting $\phi$ and $\psi$ be any arbitrary well-formed formulae.
+
 As for axioms, we will have three schemes, namely
 \begin{enumerate}[label=(A\arabic*), leftmargin=4em]
 	\item $\phi \to (\psi \to \phi)$
@@ -350,7 +360,7 @@ Using our formal system, we can prove the following:
 \end{proof}
 
 Now, like I've mentioned before, the whole point of formalizing logic is to give a means to interpret logic as a mathematical object to study it as such.
-%TODO add proofs of deduction, double negative, and proof by contradiction and contrapositive.
+%TODO: add proofs of deduction, double negative, and proof by contradiction and contrapositive.
 
 \subsection{Interpretation of Truth}
 Now that we've defined how to manipulate and construct proofs in our formal system, let's provide our system with some meaning and discuss the notion of truth.
@@ -372,7 +382,7 @@ This is no mistake since the valuation operation can be understood as a function
 \begin{ex}
 	Let's consider the valuation of each of our axioms in propositional logic.
 	Let's draw our attention first to our first axiom. If $(p)$ and $(q)$ are atomic formulae, we can define our rule $S$ by letting
-	%TODO finish this example.
+	%TODO: finish this example.
 	\label{ex:val-axioms}
 \end{ex}
 
@@ -390,19 +400,146 @@ In addition, our axioms need not be tautologies, which complicates matters even 
 But, when statements derived from a proof are indeed tautologies, we say this formal system is \textbf{sound}.
 
 \begin{thm}
-	Propositional logic is sound.	
+	Propositional logic is sound.
 \end{thm}
 \begin{proof}
 	We've already shown in example \eqref{ex:val-axioms} that our axioms are tautologies.
 	Thus, we check that modus ponens preserves tautologies.
-	
+
 	Suppose $p$ and $p \to q$ are both tautologies.
 	Then the result is immediate after examining the truth table in figure \eqref{fig:prop-sound}.
-	
+
 	With these two facts, we prove the soundness of propositional logic.
-	Suppose we have a theorem $p$ of length arbitrary length $N$.
-	
+	Suppose we have a theorem $p$ of length $N$.
+
+	%TODO: finish this
 \end{proof}
+
+The next natural, yet non-trivial, question to ask about our logic system is whether our system is \textbf{complete}.
+A logic system is complete when every true statement has a proof.
+It turns out that more complicated logic systems do not satisfy this property.
+But, for the relatively simple ones which we consider here, this property indeed holds.
+
+\begin{thm}
+	Propositional logic is complete
+\end{thm}
+\begin{proof}
+	%TODO: Do this proof.
+\end{proof}
+
+\section{First-Order Logic}
+For its simplicity, propositional logic has very nice properties that are relatively easy to prove.
+However, propositional logic doesn't have enough power to express the things we'd like to express in math.
+For this reason, mathematicians use a slightly more complex system.
+This, in turn, makes completeness and soundness more difficult to prove, but simple enough that these properties still hold.
+
+\subsection{Intuition}
+Let's first get a feel for how first-order logic works before we define it as a formal system.
+
+Several differences between propositional and first-order logic are that in first-order logic, our variables represent objects in some \textit{domain of discourse}, as opposed to just truth values.
+With these objects, statements become true when these objects satisfy some condition given by a \textit{predicate}.
+As a result, sometimes first-order logic is also known by the name \textit{predicate logic}.
+
+A predicate in logic can be thought of simply as a relation between any finite number of terms.
+A predicate is true when the collection of terms satisfies the relation.
+We call relations requiring $n$ terms \textit{n-nary} relations, and we call relations between two terms or one term a \textit{binary relation} and \textit{unary relation} respectively.
+Then, using the same rules as seen in propositional logic, these predicates can be composed to form full statements and evaluated like before for their truth values.
+As such, we can think of predicates like functions that take in a set of terms and output true or false; thus, we adopt the following notation
+$$\phi(x_1,x_2,...,x_n)$$
+for a $n$-nary relation called $\phi$.
+
+Since first-order logic works on sets of objects, we require our system to have \textit{quantifiers}, which quantify how many objects in some domain has to satisfy a given predicate for the statement to be true.
+The two quantifiers we use in math are \textbf{there exists} ($\exists$) and \textbf{for all} ($\forall$), more formerly known as the \textit{existential} and \textit{universal} quantifiers.
+
+These are the only two that we need, and every other quantifier can be represented by some combination of these two.
+
+But with a bit more careful analysis, it turns out even two is too many, and we can reduce it down to just one.
+Let's explore this idea a bit further by considering the following example:
+\begin{equation}
+	\textit{Every tree is green.}
+	\label{eq:tree-green-ex}
+\end{equation}
+If we think about when statement \eqref{eq:tree-green-ex} is false, we realize it's precisely false when there is at least one tree \textit{not} green.
+Hence, the negation of this statement is precisely
+\begin{equation}
+	\textit{There exists some tree that's not green.}
+	\label{eq:tree-green-ex-neg}
+\end{equation}
+If we represent the predicate $\textit{is green}$ by the symbol $\phi(x)$, where $x$ represents a tree in some domain, we can represent statement \eqref{eq:tree-green-ex} by
+\begin{equation}
+	(\forall x)(\phi(x)).
+\end{equation}
+Then since the predicate $\textit{is not green}$ is precisely the negation of the predicate $\textit{is green}$, thus representing statement \eqref{eq:tree-green-ex-neg} symbolically, we have
+\begin{equation}
+	(\exists x)(\neg \phi(x)).
+\end{equation}
+As discussed before, since these statements are negations of each other, we have that
+\begin{equation}
+	\neg ((\forall x)(\phi(x))
+\end{equation}
+is logically equivalent to statement \eqref{eq:tree-green-ex-neg}.
+
+As we can see, the existential and universal quantifiers are negations of each other, and hence we can represent one with the other simply by negation.
+
+\subsection{Formalization}
+Like before with propositional logic, the remaining sections targeted at formalizing first-order logic can be skipped with no loss of continuity (except for a few inconsequential examples).
+
+To formalize first-order logic, we start with the alphabet we will be working with.
+Like before, we use alphanumeric (or Greek) symbols to represent variables, except this time, our variables represent objects in some domain of discourse.
+Similar to before, we use the symbols $\to$ and $\neg$ to denote the conditional and negation operators, and use parentheses to group statements together.
+To denote predicates, we will adopt the notation from the previous section, and this time we include $\forall$, the universal quantifier.
+Note, in our formal system, we didn't make any mention of the existential quantifier.
+It turns out that the two quantifiers can be represented in terms of one another; hence, to make defining our formal system easier, it suffices only to include one.
+
+We define the concept of a well-formed formula similarly to before, except that this time, our atomic formulae will consist of the set of all predicates, complete with arbitrary variables.
+Hence, the following are examples of atomic formulae:
+\begin{equation}
+	\phi(x_1,x_2,\dots,x_n), \quad f(1, 2, x, a), \quad h(\alpha,\beta,\gamma),
+\end{equation}
+and the following are \textit{not} exmaples of well-formed atomic formulae:
+\begin{equation}
+	\phi( ,\alpha,\beta, ), \quad f(,,).
+\end{equation}
+These atomic formulae form a basis from which we construct more complex formulae using a similar recursive procedure, which I've listed below for the reader's convenience:
+\begin{enumerate}
+	\item If $\phi$ and $\psi$ are both well-formed, then $(\phi\to \psi)$ is also well-formed,
+	\item If $\phi$ is well-formed, then $\neg p$ is well-formed.
+\end{enumerate}
+To accommodate quantifiers, first-order logic additionally includes
+\begin{enumerate}
+	\item If $\phi$ is well-formed and $x$ is any arbitrary variable, then $(\forall x)\phi$ is well-formed.
+\end{enumerate}
+Following this, we determine that the following formulae are well-formed:
+\begin{equation}
+	\neg((\forall z)(\phi(x,y,z) \to \psi(a,b))), \quad
+	(\forall x)(\phi(x) \to ((\forall w)(\neg \lambda(y,z))))
+\end{equation}
+and the following formulae are \textit{not} well-formed:
+\begin{equation}
+	\neg(\phi(,,z)(\forall x) \to), \quad \phi(x,y) \to \psi(x,y)(\forall x)\neg.
+\end{equation}
+
+Now, while not officially a part of our formal system, we can define the existential quantifier as
+\begin{equation}
+	(\exists x)\phi := \neg(\forall x)(\neg \phi)
+\end{equation}
+and use it to simplify formulae.
+We can additionally use $\vee, \wedge$, and $\leftrightarrow$, like we did in propositional logic, to simplify our formulae further.
+
+For axioms, we can inherit the first three from propositional logic, namely
+\begin{enumerate}[label=(A\arabic*), leftmargin=4em]
+	\item $\phi \to (\psi \to \phi)$
+	\item $[\phi \to (\psi \to \theta)] \to [(\phi \to  \psi) \to (\phi \to \theta)]$
+	\item $[(\neg \psi \to \neg \phi) \to (\phi \to \psi)]$.
+\end{enumerate}
+To accommodate the addition of quantifiers, we include the following axioms:
+\begin{enumerate}
+	\item
+\end{enumerate}
+
+... Too be continued ...
+
+
 
 
 

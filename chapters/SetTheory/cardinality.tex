@@ -1,0 +1,470 @@
+\section{Cardinality}
+A natural property that sets have is their \textit{cardinality} or in other words, the number of elements in a set.
+For the finite case, this is a rather simple as a finite algorithm always exist\footnote{One can always in theory just count the number of elements of any arbitrary large finite set. Since the sets in question are finite, the algorithm will always be completed in finite time (albeit sometimes the entire will take longer than the age of the universe.)} which compares the sizes of any two sets.
+However, this primitive method of comparing sets would not work in the infinite case.
+Thus, if we restrict ourselves to this rather primitive method of comparing cardinality, we severely limit our understanding of sets.
+To study infinite sets, set theory provides us a very useful generalization of our intuitive notion of size so that we can better understand sets that extend beyond infinity.
+
+For this section, to save some on some clutter, I will leave the proofs of various injections, surjections, and bijections that I've determined to be rather elementary as exercises for the reader, for I find many of these proofs are unimportant to the main arguments presented in this section.
+
+\begin{define} \label{def:cardinality}
+	Let $X$ and $Y$ be sets.
+	$X$ and $Y$ has the same cardinality if and only if there exists a bijection $f:X \to Y$.
+\end{define}
+
+When two sets $X$ and $Y$ have the same cardinality, we often denote this relation by $|X|=|Y|$.
+As suggested by the choice of notation, this is indeed an equivalence relation (see \cref{exer:card-eq}).\footnote{
+	If were to be a bit picky, our definition of a relation works between two sets.
+	However, if we pause to pose the question \textit{what set does this relation operate over}, we would quickly come to the conclusion the set in question would have to be \textit{the set of all sets}.
+	If were a bit more formal about our definitions of a set here, we would quickly find the \textit{set of all sets} is not in fact a set (see final section of this chapter).
+	What we have here instead is not a relation between two sets but rather a relation between two \textit{proper classes}, or collection of objects that don't form a set.
+	In particular, our relation relates objects between the \textit{class of all sets}.
+}
+This intuitive formalizes the idea of comparing two sets by writing two sets in a side-by-side table.
+The two lists are identical if and only if there is a bijection between the two sets.
+
+We can also define an order relation on set cardinality by the following:
+\begin{define}
+	$X$ and $Y$ are sets such that $|X|\le |Y|$ if and only if there is an inclusion $X \to Y$.
+\end{define}
+
+One should check that this indeed forms a linear ordering  on equivalence classes of sets with equal cardinality (see \cref{exer:card-order}).
+In particular \cref{prop:card-well-order} shows this ordering satisfies the conditions to be a well-ordering.
+In search of a solution, one might make use of the following result:
+%TODO: add this proposition
+
+\begin{lemma}
+	Let $X$ and $Y$ be sets. Suppose there exists the inclusion $f:X \to Y$ and surjection $g:X \to Y$.
+	Then there exists a bijection $X \to Y$.
+\end{lemma}
+\begin{proof}
+	%TODO: Finish This
+\end{proof}
+
+Let us also note the following useful results.
+
+\begin{prop} \label{prop:subset-card}
+	Suppose $W \subseteq X$, then $|W| \le |X|$.
+\end{prop}
+\begin{proof}
+	The restriction $\id \mid _W$ (also known as the canonical injection) is injective thus providing the conclusion.
+\end{proof}
+
+\begin{prop} \label{prop:set-neq-power}
+	For any set $X$, $X < |P(X)|$.
+\end{prop}
+\begin{proof}
+	Let $i:X \to |P(X)|$ be the function such that $i(x):= \{x\}$.
+	Clearly, $\phi$ is injection thus $X < |P(X)|$.
+
+	Then notice, for the subset
+	\begin{equation}
+		W := \{x \in X \mid x \notin \phi(x)\},
+	\end{equation}
+	for any $x\in X$ such that $x \in W$, $\phi(x) \neq W$ since $x \notin \phi(x)$.
+	Conversely for any $x\in X$ such that $x \notin W$, $\phi(x) \neq W$ since $x\in \phi(x)$.
+	Therefore, $W$ is not in the range of $\phi$.
+	This shows a bijection between $X$ and $P(X)$ cannot exist thus $|X|\neq|P(X)|$ thereby proving the proposition.
+\end{proof}
+
+\subsection{Finite Sets}
+To explore this concept more, let's first talk about the simplicist type of sets: Finite sets.
+Let's begin by giving a formal definition of what we're about to discuss.
+
+\begin{define}
+	A $X$ is finite if $|X|=|N_n|$, for some $n\ge 0$, where
+	$$N_n := \{m\in \nat \mid m \le n\}.$$
+\end{define}
+
+One can check this indeed formalizes the intuitive understanding of a finite set.
+Let's make a few observations.
+
+\begin{prop} \label{prop:finite-in-sur-bi-eq}
+	For finite sets $X$ and $Y$ such that $|X|=|Y|$, the following are equivalent:
+	\begin{enumerate}
+		\item $f:X\to Y$ is one-to-one,
+		\item $f:X \to Y$ is onto $Y$,
+		\item $f:X \to Y$ is a bijection.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	Given 3, 1 and 2 follows trivially.
+
+	We prove $1 \implies 3$
+	Suppose $f:X \to Y$ is one-to-one.
+	Since $X$ and $Y$ are finite, we have for some $n$
+	\begin{equation}
+		|X|=|Y|=|N_n|
+	\end{equation}
+	We proceed by induction on $n$.
+	\Cref{exer:zero-card-set} shows $\varnothing$ is unique set such that $|X|=|N_0|$.
+	Thus functions between $N_0$ cardinality sets must be of the form $f:\varnothing \to \varnothing$.
+	By \cref{prop:unique-empty-function}, only one such functions exists and one can check this unique function is a bijection.
+
+	For inductive step, suppose if $f:X \to Y$ is one-to-one for $|X|=|Y|=|N_n|$, then it's onto $Y$.
+	Then for $|X'|=|Y'|=|N_{n+1}|$, for any $f':X'\to Y'$ that is one-to-one, by the cardinality of $X'$, there exists $\rho:N_{n+1} \to X'$ that is a bijection.
+	The restriction $f'\mid_{X' \setminus \{x_0\}}$ is one-to-one into $Y' \setminus \{y\}$ for $x_0= \rho(n+1)$ and $y_0=f'(x_0)$.
+	If we show
+	\begin{equation}
+		|X' \setminus \{x_0\}|=|Y' \setminus \{y_0\}|=|N_n|,
+	\end{equation}
+	the inductive hypothesis concludes the restriction of $f'\mid_{X' \setminus \{x_0\}}$ is onto $Y' \setminus \{y_0\}$ and thus $f'$ is one-to-one onto $Y'$.
+
+	The restriction $\rho_{N_{n+1}\smallsetminus \{n+1\}}$ is clearly one-to-one onto $X' \setminus \{\rho(n+1)\}$.
+	Since $|Y|=|N_{n+1}|$, there exists bijection $\tau:N_{n+1} \to Y$.
+	Define $\sigma: N_{n+1} \to N_{n+1}$ such that
+	\begin{equation}
+		\sigma(k) :=
+		\begin{cases}
+			k 				\quad &\text{if } k \neq n+1 \text{ or } \tau^{-1}(y_0), \\
+			n+1 			\quad &\text{if } k=\tau^{-1}(y_0), \\
+			\tau^{-1}(y_0)	\quad &\text{if } k=n+1.
+		\end{cases}
+	\end{equation}
+	$\sigma$ is a bijection, and in particular the composition $\tau \circ \sigma$ is a bijection by \cref{prop:comp-in-sur-bi} and $(\tau\circ \sigma)(n+1)=y_0$.
+	Following the same argument for the $X'$ case, $|Y' \setminus \{y_0\}|=|N_n|$.
+
+	$2 \implies 3$ follows from $1\implies 3$ by observing every surjective function admits a section.
+	The section is one-to-one, thus $1\implies 3$ implies this section is a bijection.
+	Thus, it suffices by showing these facts imply original function must be a bijection (see \cref{exer:finite-sur-in}).
+\end{proof}
+
+The previous theorem has the following consequences:
+
+\begin{cor} \label{cor:unique-nat-finite-card}
+	 $m \neq n$ if and only if $|N_m| \neq |N_n|$.
+\end{cor}
+\begin{proof}
+	Let $m \neq n$.
+	Then suppose without loss of generality, $m < n$, then we have the canonical injection $i:N_m \to N_n$ since $N_m \subseteq N_n$.
+	This inclusion is clearly not surjective, thus by \cref{prop:finite-in-sur-bi-eq}, we conclude $|N_m|\neq |N_n|$.
+
+	The reverse direction is trivial.
+\end{proof}
+
+\begin{cor} \label{cor:nat-finite-card-ineq}
+	$m \le n$ if and only if $|N_m| \le |N_n|$
+\end{cor}
+\begin{proof}
+	The canonical injection $N_m \to N_n$ for $m \le n$ makes the forward direction immediate.
+
+	For the reverse direction, suppose $m > n$, then we have the obvious inclusion $i: N_n \to N_m$, thus $|N_m| \ge |N_n|$.
+	\Cref{cor:unique-nat-finite-card} implies this inequality is strict thus $|N_m| > |N_n|$.
+\end{proof}
+
+\Cref{cor:unique-nat-finite-card} makes precise the observation that sets with $m$ and $n$ elements for $m\neq n$ aren't the same size, a rather unremarkable fact given our intuitive understanding of the world.
+Mathematically, it also means that the function
+\begin{equation}
+	\nat \cup \{0\} \to \mathcal{F}_\sim, \quad n \mapsto  |N_n|\footnotemark
+\end{equation}
+is bijective, for $\mathcal{F}_\sim$ is the class (since the collection of all finite sets is not itself a set for technical reasons) of equivalence classes of finite sets identified by cardinality.\footnote{
+	For the set theorist out there, I'm being very imprecise with my definitions on purpose to avoid confusion.
+	In particular, taking the collection of equivalence classes on a proper class requires some nuance since proper classes by definition can't belong to any class.
+	We will ignore this here since it's unimportant to the argument which I construct here.
+}
+One should also check that this function is well-defined and surjective (see \cref{exer:finite-set-map-to-nat}).
+\footnotetext{The symbol $a \mapsto b$ indicates $f(a) = b$ for a function $f:A \to B$.}
+Consequently, this class function allows us to uniquely identify each finite set with a natural number corresponding to its size making precise the statement \textit{$X$ is a set of $m$ elements}.
+With a bit of abuse of notation, we often denote the cardinality of a finite set $X$ of $m$ elements by $|X|=m$.
+Finally, \cref{cor:nat-finite-card-ineq} says the class bijection also preserves the order relation (i.e $m \le n$ implies $|N_m| \le |N_n|$).
+This makes precise the statement \textit{a set of $m$ elements is larger than a set of $n$ elements for $m \le n$}.
+
+\begin{cor} \label{cor:finite-subset-card}
+	Suppose $W \subsetneq X$, then $|W| < |X|$.
+\end{cor}
+\begin{proof}
+	\Cref{prop:subset-card} gives use $|W| \le |X|$.
+	Since the canonical inclusion $W \to X$ is not an onto, since $W$ is a proper subset, \cref{prop:finite-in-sur-bi-eq} implies $|W| \neq |X|$, thus we obtain our conclusion.
+\end{proof}
+
+\Cref{cor:finite-subset-card} makes the statement in \cref{prop:subset-card} stronger in the case of finite sets which formalizes the idea that subcollection is strictly smaller than the original collection.
+This observation, however, generally doesn't hold in the case of infinite sets as we will see later.
+
+\Cref{prop:finite-in-sur-bi-eq} also gives us the following useful result:
+
+\begin{thm}[Pigeonhole Princciple] \label{thm:pigeonhole}
+	Suppose $X$ and $Y$ are finite sets such that $|X| > |Y|$ and the function $f:X \to Y$ is onto $Y$.
+	Then $f$ is not one-to-one.
+\end{thm}
+\begin{proof}
+	See \cref{exer:pigionhole}
+\end{proof}
+
+This formalizes the observation that if we have $m$ boxes and $n$ items such that $m<n$, one box must contain more than one item.
+The following examples show how this concept can be used in math.
+
+%TODO: add pigion hole examples.
+
+\begin{prop} \label{prop:card-arith}
+	Suppose $|X|=m$ and $|Y|=n$, then the following hold:
+	\begin{enumerate}
+		\item $|X \cup Y| = m + n$ for $X\cap Y=\varnothing$,
+		\item $|X \times Y| = mn$,
+		\item $|X \setminus W|$ for $W \subseteq X$.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	This proposition is proved by explicitly constructing the required bijections (see \cref{exer:card-arith}).
+	%TODO: add exercise.
+\end{proof}
+
+\begin{thm} (Inclusion-Exclusion Principle)
+	Suppose $X$ and $Y$ are finite sets, then
+	\begin{equation}
+		|X\cup Y| = |X| + |Y| - |X \cap Y|
+	\end{equation}
+\end{thm}
+\begin{proof}
+	We have the following set identity:
+	\begin{equation}
+		X \cup Y = (X \setminus (X\cap Y)) \cup (Y \setminus (X\cap Y)) \cup (X \cap Y) \quad \text{see \cref{exer:ex-in-set-id}}.
+	\end{equation}
+	The sets $X \setminus (X\cap Y)$, $Y \setminus (X\cap Y),$ and $X \cap Y$ sets pairwise disjoint (i.e. intersection of each pair is $\varnothing$.)
+	Therefore, by \cref{prop:card-arith}, we have
+	\begin{align}
+		|X \cup Y| &= |(X \setminus (X\cap Y)) \cup (Y \setminus (X\cap Y)) \cup (X \cap Y)| \\
+			&= |X \setminus (X \cap Y)| + |Y \setminus (X \cap Y)| + |X \cap Y| \\
+			&= |X| - |X \cap Y| + |Y| - |X \cap Y| + |X \cap Y|\\
+			&= |X| + |Y| - |X \cap Y|
+	\end{align}
+\end{proof}
+
+\begin{prop}
+	If $|X|=m$ and $|Y|=n$, then $|Y^X|=n^m$
+\end{prop}
+\begin{proof}
+	By \cref{prop:prod-func-eq} we have $|Y^X|=|\prod_{x\in X}Y|=|Y^m|$
+	\Cref{prop:card-arith} gives us $|Y^m|=|Y|^m = n^m$, thereby completing the proof.
+\end{proof}
+
+These relations give us a way to compute the sizes of various finite sets.
+The full study of counting sizes of finite sets will be covered in \cref{ch:combinatorics}, but here are a few basic examples using these formulae.
+
+%TODO: Add chapter ref and add examples of combinatorics.
+
+\subsection{Infinite Sets}
+Previously, the various propositions that we proved are, so we can check that our formalism matches what our intuition tells about.
+However, as we move to infinite sets, our intuition starts to breakdown and the real power of this formalism start to show.
+
+Let's start with the following definition
+
+\begin{define} \label{def:countable}
+	A set is \textit{countable} if and only if $|X|\le|\nat|$.
+	If a set is countable yet not finite, we denote these sets as \textit{countably infinite}.
+\end{define}
+
+\begin{ex} \label{ex:countable-set}
+	\Cref{def:countable} tells us immediately that the set $\nat$ is countable.
+	In additional, for any finite set, since there exists the canonical inclusion $N_n \to \nat$, we get that finite sets are all countable.
+	In particular since for any map $f:N_n \to \nat$, the natural number
+	\begin{equation}
+		m:=\sum_{k \in N_n} f(i)
+	\end{equation}
+	is not in the range of $f$ thus $f$ is never a bijection.
+	This shows $\nat$ is not finite, implying $\nat$ is countably infinite.
+
+	We can show the following sets are also countably infinite by constructing a suitable bijection.
+	To start, for any finite set $|X|=n$ (suppose without loss of generality $X \cap \nat = \varnothing$), let $\rho: N_n \to X$ be a bijection, then define
+	\begin{equation}
+		\phi: \nat \to \nat \cup X, \quad \phi(k):=
+			\begin{cases}
+				\rho(n)		\quad &\text{if } k \le n, \\
+				k-n j		\quad &\text{if } k > n.\\
+			\end{cases}
+	\end{equation}
+	$\phi$ is a bijection thus the set $\nat \cup X$ is countable.
+	We can of course replace $\nat$ with any countable set, with the finite case handled in \cref{prop:card-arith} and the bijection for the infinite case can be obtained similarly by composing the $k>n$ case with the bijection $\nat \to Y$, for some arbitrary countable infinite set $Y$.
+
+	We can also show $\integ$ is countable by considering the bijection
+	\begin{equation}
+		\psi:  \integ \to \nat \cup \{0\}, \quad \psi(k):=
+		\begin{cases}
+			2k,		\quad &\text{if } k\ge 0, \\
+			-(2k+1)	\quad &\text{if } k < 0.
+		\end{cases}
+	\end{equation}
+	Then denote the set of even integers by $2\integ$, then by the bijection,
+	\begin{equation}
+		\tau: \integ \to 2\integ, \quad \tau(k) = 2k
+	\end{equation}
+	the set of even integers is also countable.
+	Since $2\integ \subseteq \integ$, this provides us for a counterexample for the claim that $W \subsetneq X$ implies $|W| < |X|$ in the case of infinite sets.
+\end{ex}
+
+\begin{prop} \label{prop:countable-product}
+	Let $X$ and $Y$ be countable sets.
+	Then $X\times Y$ is countable.
+\end{prop}
+\begin{proof}
+	Let's prove the proposition for the case $\nat \times \nat$.
+	By the following diagram
+	\[\begin{tikzcd}
+		& 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
+		1 & \bullet & \bullet & \bullet & \bullet & \bullet & \bullet \\
+		2 & \bullet & \bullet & \bullet & \bullet & \bullet \\
+		3 & \bullet & \bullet & \bullet & \bullet \\
+		4 & \bullet & \bullet & \bullet \\
+		5 & \bullet & \bullet \\
+		6 & \bullet \\
+		\vdots
+		\arrow[from=2-2, to=2-3]
+		\arrow[from=2-3, to=3-2]
+		\arrow[from=2-4, to=2-5]
+		\arrow[from=2-5, to=3-4]
+		\arrow[from=2-6, to=2-7]
+		\arrow[from=2-7, to=3-6]
+		\arrow[from=3-2, to=4-2]
+		\arrow[from=3-3, to=2-4]
+		\arrow[from=3-4, to=4-3]
+		\arrow[from=3-5, to=2-6]
+		\arrow[from=3-6, to=4-5]
+		\arrow[from=4-2, to=3-3]
+		\arrow[from=4-3, to=5-2]
+		\arrow[from=4-4, to=3-5]
+		\arrow[from=4-5, to=5-4]
+		\arrow[from=5-2, to=6-2]
+		\arrow[from=5-3, to=4-4]
+		\arrow[from=5-4, to=6-3]
+		\arrow[from=6-2, to=5-3]
+		\arrow[from=6-3, to=7-2]
+	\end{tikzcd}\]
+	where the first component is listed in the first column and the second component listed as the first row, following the arrows, we obtain a bijection between $\nat \times \nat \to \nat$.
+
+	Then to prove the case where both sets are countably infinite, let $\i_X \to \nat$ and $\i_Y: Y \to \nat$ be injections.
+	The function defined by
+	\begin{equation}
+		\phi: X \times Y \to \nat \times \nat, \quad \phi(x,y):= (i_X(y), i_Y(y)))
+	\end{equation}
+	is an injection.
+	Therefore, $|X\times Y| \le |\nat \times \nat|=|\nat|$
+\end{proof}
+
+\begin{cor}
+	Let $\mathcal{U}$ be a countable collection of countable sets.
+	Then union of all sets in $U$, dented $\bigcup_{U \in \mathcal{U}} U$, is countable.
+\end{cor}
+\begin{proof}
+	Let $i_U: U \to \nat$ be injections for each $U \in \mathcal{U}$.
+	Then by \cref{thm:left}, there exist retractions $r_U: \nat \to U$ for each $U$.
+	\Cref{thm:right} concludes these retractions are surjective.
+	Then the function
+	\begin{equation}
+		\phi: \mathcal{U} \times \nat \to \bigcup_{U \in \mathcal U}, \quad  \phi(U,k):=r_U(k).
+	\end{equation}
+	In particular, $\phi$ is onto and thus admits a section by \cref{thm:right}.
+	This section is of the form $\bigcup_{U \in \mathcal U} \to \mathcal U \times \nat$ and is injective \cref{thm:left}.
+	Therefore, $|\bigcup_{U \in \mathcal U} U | \le |\mathcal U \times \nat| \le |\nat|$ by \cref{prop:countable-product}
+	Thus $\bigcup_{U \in \mathcal U} U$ is countable.
+\end{proof}
+
+\begin{ex}
+	\Cref{prop:countable-product} implies $\integ \times \integ$ is countable.
+	Observe, since $\rat$ is the set of all reduced fractions, we can instead rewrite each fraction as an ordered pair and we observe $\rat \subseteq \integ \times \integ$.
+	Since $\integ \times \integ$ is countable and canonical inclusions implies $|\rat| \le |\integ \times \integ|$, we see $\rat$ is in fact countable.
+
+	At this point, we might conclude that every infinite set is countable, but of course this is not the case (or else there wouldn't be a dedicated chapter talking about them).
+	Let's examine the set $\real$.
+	We know from experience each real number can be given a decimal expansion.
+	In particular, let's restrict ourselves to the interval $0\le x < 1$.
+	We can view each decimal expansion as a sequence of integers ranging from 0 to 9.
+	Let's denote the set of sequences of digits as $10^\nat$.
+	We note since $10^\nat$ can be viewed as a subset of $\real$, we have $|10^\nat| \le \real$
+	If $2^\nat$ denotes sequences of binary digits (sequences of 0 and 1), the map
+	\begin{equation}
+		\pi: 10^\nat \to 2^\nat, \quad \pi(d_i):=
+		\begin{cases}
+			1	\quad &\text{if } d_i \neq 0, \\
+			0	\quad &\text{if } d_i =0
+		\end{cases}
+	\end{equation}
+	is surjective, thus $|2^\nat|\le|10^\nat|$ by the existence of a section.
+	Since the map
+	\begin{equation}
+		\phi:P(\nat) \to 2^\nat, \quad \phi(S)_i:=
+		\begin{cases}
+			0	\quad&\text{if } i\notin S \\
+			1	\quad&\text{if } i\in S \\
+		\end{cases}
+	\end{equation}
+	is a bijection,\footnote{
+		We can form this bijection with any set.
+		For this reason, we sometimes denote $|P(X)|=2^X$.
+	} and by \cref{prop:set-neq-power}, we have
+	\begin{equation}
+		\nat < |P(\nat)| \le |2^\nat| \le |10^\nat|\le|\real|.
+	\end{equation}
+	This implies the set $\real$ is \textit{not} countable, a remarkable result since any interval in $\real$ intersects non-trivially with $\rat$\footnote{A non-trivial result we will prove in a later section.}
+	We refer to non-countable sets simply as \textit{uncountable}.
+	This also shows the idea that there are different sizes of infinity, something not obvious given our understanding of infinity using out intuition.
+	In fact \cref{prop:set-neq-power}, we can get even larger infinities by iteratively taking the power set of $\nat$.
+
+	If we were a bit more particular about our choice of function $10^\nat \to 2^\nat$, we could actually obtain a bijection here, since every real number also has a unique binary representation.
+	In addition, a bijection can also be constructed for $[0,1) \to \real$, a fact I will leave for the reader to ponder.
+	In light of these facts, we in fact have $|\real| = 2^\nat$, where $2^\nat$ denotes the cardinality of $P(\nat)$.
+
+	However, if there's any doubt about the previous argument, let me provide visual argument of the same fact.
+	For every function from $\nat$ to $0<x<1$ and , we can represent the bijection as the following list:
+	\[\begin{tikzcd}
+		{\textbf{1:}} & {\textcolor{red}{.1}} & 4 & 3 & 9 & 3 & \dots \\
+		{\textbf{2:}} & {.2} & {\textcolor{red}{3}} & 2 & 7 & 4 & \dots \\
+		{\textbf{3:}} & {.5} & 1 & {\textcolor{red}{5}} & 2 & 3 & \dots \\
+		{\textbf{4:}} & {.5} & 0 & 5 & {\textcolor{red}{1}} & 2 & \dots \\
+		{\textbf{5:}} & {.4} & 6 & 6 & 0 & {\textcolor{red}{2}} & \dots \\
+		\vdots & \vdots & \vdots & \vdots & \vdots & \vdots & \ddots
+		\arrow[from=1-2, to=2-3]
+		\arrow[from=2-3, to=3-4]
+		\arrow[from=3-4, to=4-5]
+		\arrow[from=4-5, to=5-6]
+	\end{tikzcd}\]
+	Following the arrows along the diagonal, we can generate a new sequence by incrementing each digit by 1 (and wrap 9 back to 0), we generate a new sequence which by definition is different from every sequence on the list.
+	Thus, our function doesn't map to it, thus this function cannot be onto the interval $0<x<1$, therefore giving us the conclusion that $\real$ is not countable.\footnote{
+		This argument here is known as \textit{Canter's diagonalization argument}.
+		If we trace back our first argument, we find these arguments are morally the same.}
+\end{ex}
+
+\begin{prop}
+	Every countable infinite set has a bijection with $\nat$.
+\end{prop}
+\begin{proof}
+	Suppose $X$ is countably infinite, thus there exists a injection $i:X \to \nat$.
+	Then image $i(X)\subseteq \nat$ is infinite (since the corestriction by the range is a bijection by \cref{prop:co-onto}).
+	It suffices to show there exists a bijection $i(X) \to \nat$.
+	For each $k\in i(X)$, define
+	\begin{equation}
+		U_k := \{m \in i(X) \mid k \ge m \}.
+	\end{equation}
+	Each $U_k$ has the greatest element $k$ thus $U_k \subseteq N_k$ implies they are finite.
+	Then define $\mathcal U$ to be the collection of all these sets.
+	The obvious function $\psi:i(X) \to \mathcal U$ where $\psi(k):= U_k$ is clearly onto $\mathcal U$.
+	It is one-to-one since if $\psi(k)=\psi(k')$, we have $U_k=U_{k'}$.
+	The greatest element of each set is $k$ and $k'$ respectively thus $k=k'$ since they are the same set.
+
+	Thus, it suffices to show the function
+	\begin{equation}
+		\phi: \mathcal U \to \nat, \quad \phi(U_k):= |U_k|
+	\end{equation}
+	is a bijection.
+	Suppose $\phi(U_k)=\phi(U_{k'})$, then $|U_k|=|U_{k'}|$.
+	Since the ordering on $\nat$ is linear, $k \le k'$ or $k \ge k'$.
+	Without loss of generality, we can assume the former.
+	Therefore, $U_k \subseteq U_{k'}$.
+	Since these are finite sets with the same cardinality, the canonical injection must be the identity by \cref{prop:finite-in-sur-bi-eq}.
+	Therefore, $k=k'$ follows immediately.
+
+	To show $\phi$ is onto $\nat$, suppose $\phi(U_k)=n$.
+	We will proceed by induction on $n$.
+	For $n=1$, take $k$ to be the least element of $i(X)$, since $i(X)$ is the subset of a well-ordered set.
+	Then $\phi(U_k)=1$
+
+	Then suppose $\phi(U_k)=n$.
+	$i(X)$ is well-ordered thus we have the successor operation.
+	Every element $k$ has a successor since if it doesn't, it implies $k$ is the greatest element, and thus $i(X)\subseteq N_k$, a contradiction of the assumption $i(X)$ is infinite.
+	If $k'$ is the successor of $k$, $U_{k'}=U_{k} \cup \{k'\}$, thus $\phi(U_k)=n+1$.
+
+	By induction $\phi$ is onto, thus a bijection.
+	Therefore, the composition $\phi \circ \psi: i(X) \to \nat$ is the bijection as desired.
+\end{proof}
+
+This is a nice result and would leave many wondering whether there are sets such that $|\nat|<|X|<|2^\nat|$.
+Known as the \textit{continuum hypothesis}, this problem is unfortunately undecidable given the conventional formulation of set theory.
+The details of why mathematicians arrive at this fact is beyond the scope of anything covered in this book and thus will be omitted.

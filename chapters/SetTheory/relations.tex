@@ -1,0 +1,394 @@
+\section{Relations}
+Relationships are one of the most important constructions in all math, and in this section, we will develop strategies for dealing with them, along with different ways they can be helpful in our mathematical toolbox.
+We will mostly be focusing on \textit{binary relations} (relations between two objects), but similar constructions as seen in this chapter can be used to understand any n-relation.
+
+To start, let's provide ourselves with a set-theoretic definition of a relation:
+\begin{define}
+	Let $\square\subseteq X \times Y$ be a binary relation.
+	Then we say $x \,\square\, y$\footnotemark if and only if $(x,y)\in \square$.\footnotemark
+	\label{def:bin-rel}
+\end{define}
+\addtocounter{footnote}{-1}
+\footnotetext{$x$ is related to $y$ by $\square$}
+\addtocounter{footnote}{1}
+\footnotetext{I will note that this definition of a relation is only here to make the relation itself a set.
+As noted in a previous footnote, this is advantageous when we define sets rigorously so that every object we work with is a set, but unnecessary for a proper understanding of relations in general.
+The remaining concepts developed in this chapter are independent of whether you take the relation to be set-theoretic or not.
+}
+
+\begin{ex}
+	To explain how this works, we will use an example of a relation and build the set-theoretic version of this.
+	This relation I shall choose is $\le$, as defined for integers, since most of our readers should be familiar with it.
+	To separate this relation from the set-theoretic relation, I will use $\triangle$ for the set-theoretic relation that we will define based on $\le$.
+
+	First, to establish the sets we are relating, we will define
+\begin{equation}
+	S:=\{n\in\nat : n \le 3\}
+\end{equation}
+to be used as both operands.
+Thus, $\triangle \subseteq S^2$.\footnote{$S^2=S\times S$}
+
+Then by the \cref{def:bin-rel}, so that $\triangle$ is a representation of $\le$, we require
+\begin{equation}
+	\triangle = \{(s,t)\in S^2 \mid s \le t\},
+\end{equation}
+thus
+\begin{equation}
+	\triangle=\{(1,1),(1,2),(1,3),(2,2),(2,3),(3,3)\}.
+\end{equation}
+One can check by definition of the set-builder, for $s,t\in S$, $s\triangle t$ (implying $(s,t) \in S^2$) if and only if $s\le t$.
+\end{ex}
+
+\subsection{Equivalence Relations}
+Now, a binary relation is too broad a concept to really have interesting properties on its own, so for the remaining part of this chapter, we will restrict our attention to specific types of relations.
+First, we will turn our attention to the concept of an equivalence relation.
+
+\begin{define}
+	Let $S$ be a set and $\sim\subseteq S^2$ be a relation.
+	$\sim$ is an equivalence relation if the following hold:
+	\begin{enumerate}[label=(A\arabic*)]
+		\item (reflexive)  $x \sim x$,
+		\item (symmetric) $x \sim y$ implies $y \sim x$,
+		\item (transitive) $x\sim y$ and $y\sim z$ implies $x\sim z$.
+	\end{enumerate}
+\end{define}
+
+As we can see, the equality relation, whether in numbers or in sets, satisfies all the axioms to be an equivalence relation.
+But as we will find out, equivalence relations can describe a far more general class of relations that resemble equivalence.
+
+\begin{ex}
+	To show an example of an equivalence relation, let's define a set
+	\begin{equation}
+		S:=\{a,b,c, 1,2,3,\alpha,\beta,\gamma\}.
+	\end{equation}
+	Using this set, we will define a relation where only characters of the same type are related to each other, hence $a\sim b$, $\alpha\sim \beta$, but $1 \not\sim a$.
+	One can easily check that every property of an equivalence relation holds; hence, this is an equivalence relation.
+
+	We can also define for each element $s\in S$,
+	\begin{equation}
+		[s]_\sim:=\{t \in S \mid s \sim t\}
+	\end{equation}
+	which we shall name an \textit{equivalence class}.
+	Then notice
+	\begin{align}
+		&[a]_\sim=[b]_\sim=[c]_\sim=\{a,b,c\} \\
+		&[1]_\sim=[2]_\sim=[3]_\sim=\{1,2,3\} \\
+		&[\alpha]_\sim=[\beta]_\sim=[\gamma]_\sim=\{\alpha,\beta,\gamma\}.
+	\end{align}
+	A notable observation is that these equivalence classes partition $S$ into three sets, which are completely disjoint when not equivalent.
+	In addition, $s\in [s]$ by the reflexive property and $[s]=[t]$ is equivalent to writing $s\sim t$.
+	\label{ex:eq-rel}
+\end{ex}
+
+Now, the idea that an equivalence relation can partition a larger set into distinct classes applies far more generally than what is seen in \cref{ex:eq-rel}.
+This is, in fact, what makes these relations "equivalent" as relations between elements exactly correspond to the equivalence of equivalence classes.
+We will formalize everything with these theorems:
+
+\begin{thm}
+	Let $S$ be a set and $\sim$ be an equivalence relation on $S$.
+	Then for any $s,t\in S$, $s\sim t$ if and only if $[s]=[t]$.
+	\label{thm:equ-rel-equ}
+\end{thm}
+\begin{proof}
+	Suppose $s\sim t$. Let $u\in [s]_\sim$, then $s\sim u$ by definition.
+	By the symmetric property, we have $t \sim s$, hence by transitivity, $t \sim u$.
+	Therefore, $u\in [t]_\sim$ by definition.
+	Thus, $[s]_\sim\subseteq [t]_\sim$.
+
+	Using a similar process, we also obtain $[t]_\sim \subseteq [s]_\sim$ thereby proving $[s]_\sim=[t]_\sim$.
+
+	Conversely, suppose $[s]=[t]$, then $t\in [s]$, thus $s\sim t$ by definition.
+\end{proof}
+
+\begin{thm}
+	Let $S$ be a set and $\sim$ be an equivalence relation on $S$.
+	Then the equivalence classes of $\sim$ partitions $S$.
+	\label{thm:equ-rel-part}
+\end{thm}
+\begin{proof}
+	We first need to show that the equivalence classes cover the entire set $S$.
+	This is trivial since one could check
+	\begin{equation}
+		\bigcup_{s\in S} [s]_\sim = S.\footnotemark
+	\end{equation}
+	\footnotetext{This notation means $[s_1]_\sim \bigcup [s_2]_\sim \bigcup ...$ for $s_1, s_2, ...$ are distinct elements in $S$.}
+
+	Next, we will show that distinct equivalence classes are disjoint, or in other words, $[s]_\sim\cap [t]_\sim \neq \varnothing$ implies $[s]_\sim=[t]_\sim$.
+	If $[s]_\sim \cap [t] \neq \varnothing$, then let $u \in [s]_\sim \cap [t]_\sim$.
+	By definition of $u\in [s]_\sim$ and $u\in [t]_\sim$, we have $s\sim u$ and $t\sim u$.
+	Using the symmetric followed by the transitive property of the equivalence relations, we obtain $s\sim t$, whereby \cref{thm:equ-rel-equ} we conclude $[s]_\sim = [t]_\sim$.
+\end{proof}
+
+\subsection{Ordering Relations}
+Next, what we will consider are relations that denote order.
+Actually, what we will come to realize is that ordering relations are just slightly weaker versions of equivalence relations.
+
+We will first direct our attention to a slightly weaker version of an order, also known as a \textit{partial order}.
+Even though we will use the symbol $\le$, a partial ordering is still too weak to really resemble any standard ordering you might have seen in the past; however, this is the convention, so we will stick with it.
+
+\begin{define}
+	Let $P$ be a set. $\le$ is \textit{partial ordering} if the following are true:
+	\begin{enumerate}[label=(A\arabic*)]
+		\item (reflexive)  $x \le x$,
+		\item (antisymmetric) $x \le y$ and $y \le x$, then $x=y$,
+		\item (transitive) $x\le y$ and $y\le z$ implies $x\le z$,
+	\end{enumerate}
+	for all $x,y,z \in P$.
+\end{define}
+
+A set $P$ equipped with an order relation $\le$ are often denoted together by the ordered pair $(P,\le)$ and is commonly referred to as a \textit{poset}.
+
+\begin{ex} \label{ex:power-poset}
+	Let $X$ be an arbitrary set.
+	We show that the power set $P(X)$ can be partially ordered by the subset relation, thus making $(P(X),\subseteq)$ a poset.
+
+	We can first check that $\subseteq$ is reflexive since for every $S\in P(X)$, $S\subseteq S$.
+	The antisymmetric property is satisfied by the definition of equality for sets, namely, $S \subseteq T$ and $T\subseteq S$ if and only if $S=T$ for arbitrary sets.
+	Finally, one could quickly check by the definition of subset, $S\subseteq T$ and $T\subseteq U$ implies $S \subseteq U$ (see \cref{exer:subset-trans})
+\end{ex}
+
+\begin{define}
+	Let $X$ be a poset.
+	\begin{enumerate}
+		\item $a$ is the \textit{greatest element} if and only if for every $x\in X$, $x \le a$.
+		\item $a$ is the \textit{least element} if and only if for every $x\in X$, $a \le x$.
+		\item $a$ is a \textit{maximal element} if and only if for every $x\in X$, $x=a$ or $a \not\le x$
+		\item $a$ is a \textit{minimal element} if and only if for every $x\in X$, $x=a$ or $x \not\le a$.
+	\end{enumerate}
+\end{define}
+
+The greatest elements are not the same as the maximal, and while greatest elements are necessarily unique, maximal elements are not.
+Similarly, the same can be said about the minimal and least elements.
+
+\begin{ex}
+	%TODO: add example for maximal and least elements.
+\end{ex}
+
+While powerful, posets are of limited use for the math developed in this book, so to make this concept more useful, we will impose stronger conditions.
+Observe in \cref{ex:power-poset}, we can construct $X=\{1,2,3\}$ and $S=\{1\}$ and $T=\{2\}$.
+It follows that $S\not \subseteq T$ and $T\not \subseteq S$.
+As one can see, for a partial ordering, not every element is comparable, which sharply contrasts with what we see with any standard ordering of numbers.
+For this reason, any sets ordered by a partial ordering can't be represented in a line (in general), like what we see with a number.
+Instead, posets are more generally represented by a graph,\footnote{
+	The \textit{graph} seen here is not the \textit{plot} of a function but rather a collection of nodes called \textit{vertices} connected by lines called \textit{edges}.
+	In this book, \textit{plots} of functions will be referred to as such to minimize confusion.}
+as seen in \cref{fig:poset-graph}.
+
+\begin{figure} \caption{} \label{fig:poset-graph}
+	%TODO: add poset graph
+\end{figure}
+
+To make an ordering fit on a line, we will introduce a \textit{linear ordering} or a \textit{total ordering} defined as follows:
+
+\begin{define}
+	Let $X$ be a set.
+	Then $X$ is a \textit{linear ordering} if the following hold:
+	\begin{enumerate}[label=(A\arabic*)]
+		\item (reflexive)  $x \le x$,
+		\item (antisymmetric) $x \le y$ and $y \le x$, then $x=y$,
+		\item (transitive) $x\le y$ and $y\le z$ implies $x\le z$,
+		\item (totality) $x\le y$ or $y \le x$.
+	\end{enumerate}
+	for all $x,y,z \in P$.
+\end{define}
+
+As one should notice, all linearly ordered sets are posets, and I will leave it to the reader that orderings of numbers like integers, rationals, or real numbers are linearly ordered.
+
+We, in particular, will be interested in a specific type of linear ordering, namely a \textit{well-ordering} which we define here:
+
+\begin{define}
+	Let $X$ be a set with a linear ordering by $\le$.
+	$X$ is \textit{well-ordered} by $\le$ if and only if every subset of $X$ has a least element.
+\end{define}
+
+For any finite subset of a linearly ordered set, one can easily find the least element by comparing each element one by one.
+Since every subset of a finite set is finite, we have the following result:
+
+\begin{prop} \label{prop:finite-linear-order}
+	Let $F$ be finite linearly ordered set. Then $W$ is well-ordered.
+\end{prop}
+
+Perhaps a more interesting result is the fact that $\nat$ is well-ordered.
+Since not every subset of $\nat$ is finite, the method of comparing each element one by one no longer holds.
+Thus, let me provide another way one might prove this fact.
+
+\begin{thm}
+	$\nat$ is well-ordered.
+\end{thm}
+\begin{proof}
+	Let's begin by defining our $n$-sets as
+	\begin{equation}
+		N_n = \{k\in \nat \mid k \le n\}.
+	\end{equation}
+	One can easily check the set of $n$-sets is linearly ordered by $\subseteq$ and in particular,
+	\begin{equation} \label{eq:order-preservation-N_n}
+		N_n \subseteq N_m \iff n \le m.
+	\end{equation}
+	Given any subset on $\nat$, we can represent each element uniquely as an $n$-set and by equation \eqref{eq:order-preservation-N_n}, the order passes nicely between the two representations.
+	Thus, for any $S\subseteq$, we can reduce the problem of finding the least element of $S$ to finding the least element of $\mathcal S :=\{N_n \mid n \in S\}$.
+
+	First, let's consider the intersection of $\mathcal S$, which we denote as $\bigcap_{n \in S} N_n$.
+	We show this forms an $n$-set.
+	Since for each $N_k \in \mathcal S$, $\bigcap_{n \in S} N_n \subseteq N_k$, the intersection is finite thus one can find its maximum, which we denote as $n_M$.
+	In particular, since $n_M \in N_k$ for each $N_k \in \mathcal S$ by the intersection, we require that for every $l \le n_M$, $l \in N_k$ for each $N_k$ by the definition of $n$-sets.
+	Therefore, we conclude
+	\begin{equation}
+		N_{n_M} = \bigcap_{k \in S} N_k.
+	\end{equation}
+
+	Since $N_{n_M} \subseteq N_k$ for each $N_k$, if we show $N_{n_M} \in \mathcal S$, then $N_{n_M}$ is the least element of $\mathcal S$ and thus $n_M$ is the least element of $\mathcal S$.
+	We show this by assuming the converse.
+	Thus, $N_{n_M} \subsetneq N_k$ which implies $n_M+1 \in N_k$.
+	Since this observation holds for each $N_k$, $n_M+1 \in \bigcap{k\in S} N_k$, which contradicts the assumption that $n_M$ was the greatest element.
+	Therefore, we conclude $N_{n_M} \in \mathcal S$, which thereby completes the proof.
+\end{proof}
+
+Contrast this with sets like the integers; observe that the set of integers itself doesn't have a least element.
+
+
+With a well-ordering, we can properly define the concept of a \textit{successor}, or the element immediately to the right of another, if we position a well-ordered set on a number line.
+We can define the successor of an element in a well-ordered set in the following way:
+
+\begin{define}
+	Let $W$ be a well-ordered set, then the successor of $s\in W$ is the element $t\in W$ such that $t$ is the least element of the subset
+	\begin{equation}
+		\{w\in W \mid s < w\}.
+	\end{equation}
+\end{define}
+
+We can check that this is consistent with our intuition by observing the successor of $1$ is indeed $2$ for $\nat$.\footnote{
+	We should also observe that the successor does not always exist; for example if our well-ordered set is finite; the greatest element of our finite set doesn't admit a successor.}
+
+\begin{define}
+	Let $W$ be a well-ordered set.
+	We denote $w\in W$ as a \textit{successor} if there exists some $v$ with successor $w$.
+	We denote $w_0\in W$ as \textit{zero} if $w_0$ is the least element of $W$.
+\end{define}
+
+Likewise, we can observe that $\nat$ is an example of a well-ordered set where each element is either a successor or a zero element.
+
+\subsection{Proof by Induction}
+An important application of well-ordered sets is that they provide us with a very powerful mathematical tool for proofs.
+For those who've never seen this, I will preface this section with an example.
+
+\begin{ex} \label{ex:first-induction}
+	In the following example, I'd like to show the sum of any $1,2,3,...,n$, which we notate as $\sum_{k=1}^n k$ and $n\in\nat$, is exactly $\frac{n(n+1)}{2}.$
+	First, let's check that our formula works by checking against a sequence with $n=1$. We find the sum is 1 and
+	\begin{equation}
+		\frac{1(1+1)}{2}=1
+	\end{equation}
+	hence verifying our formula works for $n=1$. Let's call this case, where $n=1$ is the base case.
+
+	We can keep checking for $n=2,3,4...$, but since we want to know that this formula works for all possible $n$, this is a never-ending process, thereby making it impossible to construct a rigorous proof.
+	This means we must look for another technique to prove our desired statement. Let's suppose, for a minute, that for some $m\in\nat$, our formula produces the right result
+	Then, using our assumption, we deduce that
+	\begin{align}
+		\paren{\sum^m_{k=1}k}+m+1&=(1+2+...+m)+m+1 \\
+								  &=\frac{m(m+1)}{2}+m+1
+	\end{align}
+	Then, by manipulating the expression, we get
+	\begin{align}
+		\frac{m(m+1)}{2}+m+1 &=\frac{m(m+1)+2(m+1)}{2} \\
+							 &=\frac{m^2+m+2m+1}{2} \\
+							 &=\frac{m^2+3m+1}{2} \\
+							 &=\frac{(m+1)(m+2)}{2} \\
+							 &=\frac{(m+1)([m+1]+1)}{2}
+	\end{align}
+	which is exactly the expression we would get if we substituted $m+1$ into our formula. Therefore, we have proven if the formula is true for $m$, then it must be true for $m+1$. Let's call this part the inductive step.
+	Here, I claim, without proof, that the base case, in combination with the inductive step, proves by induction that our formula works for all $n$.
+	But a question remains: how exactly am I able to make such a bold conclusion?
+\end{ex}
+
+Following \cref{ex:first-induction}, one can clearly see where this proof technique gets its name.
+While one can intuitively justify this method of proof, we shall provide a more rigorous justification beginning with the following lemma:
+
+\begin{lemma} \label{lem:general-induction}
+	Suppose $W$ is a well-ordered set and $S\subseteq W$ such that
+	\begin{enumerate}
+		\item $W$ contains only zero and successor elements,
+		\item for each $w\in W$ such that $w\neq w_0$ is a successor of some element $v\in W$,
+		\item if $s\in S$ comes equip with a successor $t$, then $t\in W$,
+	\end{enumerate}
+	then $S=W$.
+\end{lemma}
+\begin{proof}
+	We have $S\subseteq W$ by assumption, we show $W\subseteq S$.
+
+	Suppose $W\subseteq S \neq \varnothing$ thus there must exist some $w \in W\setminus S$ that is the least element by well-ordering.
+	$w \neq w_0$ by $w'\notin S$ and hypothesis (1), thus there exists some $v$ that has the successor $w$ by (3).
+	By definition of the least element, $v \notin W\setminus S$ thus $v \in S$.
+	However, by hypothesis (2), we require $w \in S$ thus by contradiction, we conclude $W\setminus S = \varnothing$ thus $W \subseteq S$, thereby completing the proof.
+\end{proof}
+
+For some set of statements $P$, say if we were able to uniquely index each statement with a natural number (i.e. for each statement in $p\in P$, there exists a unique $n\in \nat$ corresponding to $p$), then for each statement in $P$, we can give it the unique presentation, $p_n$.
+Intuitively, what this means is that we can pass the order relation from $\nat$ to the set $P$ by defining $p_m \le p_n$ to be valid if and only if $m \le n$ is.
+Since $\nat$ is well-ordered and contains only zero and successor elements, by defining $S$ to be the subset of only true statements contained in $P$, the remaining hypothesis in \cref{lem:general-induction} can be satisfied by proving the base case and inductive steps as shown in \cref{ex:first-induction}.
+
+Following these steps, we arrive at the following theorem:
+\begin{theorem}[Induction] \label{thm:nat-induction}
+	Suppose $P$ is an arbitrary set of statements indexed by $\nat$.
+	If
+	\begin{enumerate}
+		\item $P_1$ is true (Base case)
+		\item and $P_n$ implies $P_{n+1}$, (Inductive step)
+	\end{enumerate}
+	then $P_n$ is true for all $n$.
+\end{theorem}
+
+Since, I've already outlined the proof to this theorem, I will leave it as an exercise to the reader to write the full and formal proof of this theorem.
+For the remaining parts of the section, let's examine a few more examples.
+
+\begin{ex}
+	In this example, we'd like to prove $9^n-1$ is divisible by $8$ for all $n\in\nat \cup \{0\}$.
+	To begin, we'd first like to prove that the base case is true, and in this case, the base case is $n=0$.\footnote{
+		As I've noted in a previous footnote, whether we include zero doesn't really impact the structure of $\nat$ except what we decide to call "zero".
+		Hence, \cref{thm:nat-induction} still applies.}
+	Since $9^0-1=0$, it is divisible by 8.
+	Therefore, our base case is true.
+
+	Then, assume the statement is true for some arbitrary $k$. Then there exists, by the definition of divisibility, some $m\in\integ$ such that $9^k-1=8m$.
+	This implies $9^k=8m+1$.
+	Then for $k+1$,
+	\begin{align}
+		9^{k+1}-1 &= 9(9^k)-1 \\
+				  &= 9(8m+1)-1 \\
+				  &= 72m-8=8(9m-1)
+	\end{align}
+	Since $8(9m-1)\in\integ$, this implies $9^{k+1}-1$ is divisible by 8. Therefore, by induction for all $n\in\mathbb{W}$, $9^n-1$ is divisible by 8.
+\end{ex}
+
+\begin{ex}
+	In this example, we'd like to prove $n^2<2^{n+1}$ for any $n\in\nat$.
+	This will be a little less straightforward than in our previous examples, but what is the same is proving the base case is true, which is trivial by substitution of 1 for $n$.
+
+	For our inductive step, we assume for some $k$, $k^2<2^{k+1}$.
+	Then
+	\begin{equation}
+		2^{k+2}=2\cdot 2^{k+1}>k^2+2^{k+1}.
+	\end{equation}
+	To prove the base case, what we want on the right side is
+	\begin{equation}
+		(k+1)^2=k^2+2k+1.
+	\end{equation}
+	Somehow, we must convert the $2^{k+1}$ to $2k+1$.
+	We could do this by proving $2^{k+1}>2k+1$ for all $k\in\nat$, from which $2^{k+2}>(k+1)^2$ would immediately follow.
+	To prove this, we leverage induction again.
+
+	By substituting $k=1$, we find the base case is trivial.
+	Then, for our inductive step, we let be $m\in\nat$ such that $2^{m+1}>2m+1$.
+	Then
+	\begin{equation}
+		2^{m+2}=2\cdot2^{m+1}>2(2m+1)=2m+2m+2.
+	\end{equation}
+	Since $m\ge 1$,
+	\begin{equation}
+		2m+2m+2>2m+4>2m+2+1=2(m+1)+1.
+	\end{equation}
+	Therefore, by induction, we conclude $2^{k+1}>2k+1$ hence
+	\begin{equation}
+		2^{k+2}>k^2+2^{k+1}>k^2+2k+1=(k+1)^2.
+	\end{equation}
+
+	This also completes the proof of our first inductive step thereby completing the proof.
+\end{ex}
+

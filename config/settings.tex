@@ -10,8 +10,9 @@
 \usepackage[figurename=Figure]{caption}
 \usepackage{empheq}
 \usepackage{mdframed}
-\usepackage[b5paper, left=1.25in,right=1.25in,top=0.5in,bottom=0.5in,footskip=0.75in,includeheadfoot]{geometry}
+\usepackage[b5paper, left=1.25in,right=1.25in,top=0.9in,bottom=0.5in,footskip=0.75in,includeheadfoot]{geometry}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usepackage{pgfplots}
 \usepackage{hyperref}
 \usepackage{wrapfig}
@@ -19,16 +20,18 @@
 \usepackage{setspace}
 \usepackage{emptypage}
 \usepackage{multirow}
-\usepackage{enumitem}
 \usepackage{afterpage}
+\usepackage{cleveref}
+\usepackage{aliascnt}
 
-\newcommand\blankpage{%
+\newcommand{\blankpage}{%
     \null
     \thispagestyle{empty}%
     \addtocounter{page}{-1}%
     \newpage}
 
 \usetikzlibrary{calc, backgrounds,angles, quotes}
+\pgfplotsset{compat=1.15}
 
 \tikzset{
     partial ellipse/.style args={#1:#2:#3}{
@@ -36,80 +39,119 @@
     }
 }
 
-\theoremstyle{definition}
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\complex}{\mathbb{C}}
+\newcommand{\rat}{\mathbb{Q}}
+\newcommand{\nat}{\mathbb{N}}
+\newcommand{\integ}{\mathbb{Z}}
+\newcommand{\cpx}{\mathbb{C}}
 
-\newmdtheoremenv{theorem}{Theorem}
-\newmdtheoremenv{lemma}[theorem]{Lemma}
-\newmdtheoremenv{prop}[theorem]{Proposition}
-\newmdtheoremenv{define}[theorem]{Definition}
-\newmdtheoremenv{thm}[theorem]{Theorem}
-\newmdtheoremenv{cor}[theorem]{Corollary}
+\newcommand{\paren}[1]{\left(#1\right)}
+\newcommand{\sbrak}[1]{\left[#1\right]}
+\newcommand{\cbrak}[1]{\left\{#1\right\}}
+
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand{\abrak}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\bra}[1]{\left\langle #1 \right\rvert}
+\newcommand{\ket}[1]{\left\lvert #1 \right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \left.\right\lvert #2 \right\rangle}
+\newcommand{\ketbra}[2]{\left\lvert #1 \right\rangle\!\!\left\langle #2 \right\lvert}
+
+\newcommand{\tens}[1]{\stackrel{\leftrightarrow}{#1}}
+
+\newcommand{\jand}{\quad\text{and}\quad}
+\newcommand{\jor}{\quad\text{or}\quad}
+\newcommand{\for}{\quad\text{for }\,}
+\newcommand{\comma}{,\quad}
+
+\newcommand{\ieval}[2]{\Bigg|^{#2}_{#1}}
+\newcommand{\deval}[1]{\bigg|_{#1}}
+
+\newcommand{\diff}[2]{\frac{d#1}{d#2}}
+\newcommand{\pdiff}[2]{\frac{\partial#1}{\partial#2}}
+
+\newcommand{\id}{\text{id}}
+
+\renewcommand{\setminus}{\smallsetminus}
+
+\newcommand{\customfootnotetext}[2]
+{{% Group to localize change to footnote
+  \renewcommand{\thefootnote}{#1}% Update footnote counter representation
+  \footnotetext[0]{#2}}}
+
+\theoremstyle{plain}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{define}[theorem]{Definition}
+\newtheorem{thm}[theorem]{Theorem}
+\newtheorem{cor}[theorem]{Corollary}
 
 \numberwithin{equation}{chapter}
 \numberwithin{theorem}{chapter}
 \numberwithin{figure}{chapter}
 
+\newaliascnt{example}{theorem}
+\aliascntresetthe{example}
+\crefname{example}{example}{examples}
 \newenvironment{ex}[0]{
-	\refstepcounter{theorem}
+	\refstepcounter{example}
+	\par\noindent
+    \textbf{Example \theexample.}\ignorespaces%
+}{
+	\hfill$\spadesuit$
+    \par
+}
+
+\newaliascnt{remark}{theorem}
+\aliascntresetthe{remark}
+\crefname{remark}{remark}{remarks}
+\newenvironment{remark}[0]{
+	\refstepcounter{remark}
+	\par\noindent
+    \textbf{Remark \theremark.}\ignorespaces%
+}{
+	\hfill$\spadesuit$
 	\par
-	\noindent
-    \textbf{Example \thetheorem.}}
-    {\hfill$\spadesuit$
-    \par}
-\newenvironment{rem}[0]{
-	\refstepcounter{theorem}
-	\par
-	\noindent
-    \textbf{Remark \thetheorem.}}
-    {\par}
+}
+
+\newcounter{exercise}
+\newenvironment{exercise}[1][\unskip]{
+	\refstepcounter{exercise}%
+	\par\noindent
+    \textbf{Exercise \theexercise.\textsuperscript{#1}}\ignorespaces%
+}
+{\par}
+\numberwithin{exercise}{chapter}
+
+\newcommand{\exercisesection}{
+	\section{Exercises\textsuperscript{$\ddag$}}
+	\customfootnotetext{$\ddag$}{Difficult exercises will be identified with $\dagger$; Exercises that require optional sections are identified with $\star$}
+}
+
+\newcommand{\optionalsection}[1]{
+	\section{#1\textsuperscript{$\S$}}
+	\customfootnotetext{$\S$}{Optional section: may be skipped without loss of continuity.}
+}
 
 \newenvironment{block}
-    {\begin{center}\begin{em}\small
+{
+    \begin{center}
+    \begin{em}\small
     \begin{tabular}{p{0.9\linewidth}}
-    }
-    { 
+}
+{
     \end{tabular}
     \end{em}
     \end{center}
-    }
+}
 
-\def\real{\mathbb{R}}
-\def\complex{\mathbb{C}}
-\def\rat{\mathbb{Q}}
-\def\nat{\mathbb{N}}
-\def\integ{\mathbb{Z}}
-\def\mod#1{\mathbb{Z}_{#1}}
-\def\cpx{\mathbb{C}}
+\crefname{exercise}{exercise}{exercises}
+\crefname{ex}{example}{examples}
+\crefname{figure}{figure}{figures}
 
-\def\paren#1{\left(#1\right)}
-\def\sbrak#1{\left[#1\right]}
-\def\cbrak#1{\left\{#1\right\}}
-
-\def\ceil#1{\left\lceil #1 \right\rceil}
-\def\floor#1{\left\lfloor #1 \right\rfloor}
-\def\abs#1{\left\lvert #1 \right\rvert}
-\def\abrak#1{\left\langle #1 \right\rangle}
-\def\bra#1{\left\langle #1 \right\rvert}
-\def\ket#1{\left\lvert #1 \right\rangle}
-\def\braket#1#2{\left\langle #1 \left.\right\lvert #2 \right\rangle}
-
-\def\jand{\quad\text{and}\quad}
-\def\jor{\quad\text{or}\quad}
-\def\for{\quad\text{for }\,}
-
-\def\ieval#1#2{\Bigg|^{#2}_{#1}}
-\def\deval#1{\bigg|_{#1}}
-
-\def\diff#1#2{\frac{d#1}{d#2}}
-\def\pdiff#1#2{\frac{\partial#1}{\partial#2}}
-
-
-
-
-
-
-
-
-
-
-
+\allowdisplaybreaks

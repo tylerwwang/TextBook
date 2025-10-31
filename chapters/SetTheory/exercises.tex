@@ -1,0 +1,117 @@
+\exercisesection
+
+\begin{exercise}
+	Let $A=\{1,\beta,20\}$, $B=\{\text{two},\beta,20\},C=\{20,\text{one},\alpha\}$. Give the sets resulting from
+	\begin{enumerate}[label=\alph*)]
+		\item $A \cup B$
+		\item $A \cap B$
+		\item $C \setminus A$
+		\item $A \cup (B\cap C)$
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+	Define each of the following sets in set builder notation.
+	\begin{enumerate}[label=\alph*)]
+		\item The interval $-5<x<3$ or $-10<x<-3$.
+		\item The set of all even numbers.
+		\item The set of all positive perfect squares (excluding 0).
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise} \label{exer:product-empty}
+	\begin{enumerate}
+		\item For any $I$-indexing of $\mathcal C$ such that $\varnothing \in \mathcal C$, suppose $i \in I$, $C_i = \varnothing$, then the $\prod_{i \in I} C_i = \varnothing$.
+		\item For any $\varnothing$-indexing any collection $\mathcal C$, what is $\prod_{i \in \varnothing} C_i$?
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise} \label{exer:subset-trans}
+	Check that the subset relation transitive.
+\end{exercise}
+
+\begin{exercise}
+	Let $q$ be any real number such that $q\neq1$. Show, for any $n\in\nat$,
+	$$\sum_{k=1}^nq^k=\frac{q^{n+1}-q}{q-1}.$$
+\end{exercise}
+
+\begin{exercise}
+	Prove $5^n+5<5^{n+1}$ for all $n\in\nat$.
+\end{exercise}
+
+\begin{exercise}[$\dagger$]
+	For any statement, $P(n)$ for $n\in\nat$, suppose
+	\begin{enumerate}
+		\item $P(1)$ is true
+		\item For $n\in\nat$, $P(n)$ implies $P(n+2)$
+	\end{enumerate}
+	Prove $P(n)$ is true for every positive odd integer.
+\end{exercise}
+
+\begin{exercise} \label{exer:imgpreimg}
+	For any function $f:X \to Y$, show $f(f^{-1}(V)) \subseteq V$ for any $V \subseteq Y$.
+\end{exercise}
+
+\begin{exercise} \label{exer:comp-in-sur-bi}
+	Prove \cref{prop:comp-in-sur-bi}.
+\end{exercise}
+
+\begin{exercise} \label{exer:sur-img-preimg}
+	Prove \cref{prop:sur-img-preimg}.
+\end{exercise}
+
+\begin{exercise} \label{exer:preimg-imgbi}
+	Suppose $f:X \to Y$ is a bijection with inverse $g: Y \to X$. Then the preimage $f^{-1}(B) = g(B)$ for any $B \subseteq Y$.
+\end{exercise}
+
+\begin{exercise} \label{exer:empty-surjection}
+	Any function of the form $\varnothing \to Y$ can't be onto $Y$.
+\end{exercise}
+
+\begin{exercise} \label{exer:bi-unique}
+	\begin{enumerate}
+		\item Suppose $f:X \to Y$ is a bijection. Show $f$ has a unique inverse.
+		\item Let $r:Y \to X$ and $s: Y \to X$ be the retraction and section of $f$ given by \cref{thm:left} and \cref{thm:right}.
+			Show that these are necessarily the same function.
+	\end{enumerate}
+\end{exercise}
+
+\begin{exercise} \label{exer:prod-func-eq}
+	Let $\mathcal C$ be some collection of sets.
+	Then for any $I$-indexing of $\mathcal C$, show there is a bijection of the form $\prod_{i \in I} C_i \to \{f \in C^I \mid f(i) \in C_I\}$, for $C$ is the union of the collection $\mathcal C$.
+\end{exercise}
+
+\begin{exercise} \label{exer:card-eq}
+	Show that the relation $|X|=|Y|$ is an equivalence relation on the class of sets.
+\end{exercise}
+
+\begin{exercise} \label{exer:card-order}
+	Check that the relation $|X| \le |Y|$ forms a linear ordering on the equivalence classes of the cardinality equivalence relation.
+\end{exercise}
+
+\begin{exercise} \label{exer:zero-card-set}
+	Show $\varnothing$ is unique set with cardinality zero (has cardinality $N_0$).
+\end{exercise}
+
+\begin{exercise} \label{exer:finite-sur-in}
+	Show for a finite set $X$ and $Y$, any surjection $f:X \to Y$ is a bijection following the hint in the proof of \cref{prop:finite-in-sur-bi-eq}.
+\end{exercise}
+
+\begin{exercise} \label{exer:finite-set-map-to-nat}
+	Show
+	\begin{equation}
+		\nat \cup \{0\} \to \mathcal{F}_\sim, \quad n \mapsto  |N_n|
+	\end{equation}
+	is a bijection.
+\end{exercise}
+
+\begin{exercise} \label{exer:pigionhole}
+	Prove \cref{thm:pigeonhole}.
+\end{exercise}
+
+\begin{exercise} \label{exer:card-arith}
+	Prove \cref{prop:card-arith}.
+\end{exercise}
+
+
+
