@@ -11,24 +11,24 @@ As we know from geometry, we can find the equation of a line using only two poin
 \begin{ex}
 	In this example, I'd like to find the linear approximation for the function
 	$$f(x)=5x^3+2x+3$$
-	for the point $(1,f(1))$. 
+	for the point $(1,f(1))$.
 	We know from previous math classes, that if we had two points, we could generate a line through those points and find its slope. Therefore, we must find two points the point $(1,f(1))$, where we can draw a line through it.
-	
+
 	For now, let's use the point $(0,f(0))$ and $(2,f(2))$. To find the line that goes through these points, we use the formula
 	$$\frac{f(b)-f(a)}{b-a}=\frac{f(2)-f(0)}{2-0}=\frac{47-3}{2}=22$$
-	Then using point-slope form, we get 
+	Then using point-slope form, we get
 	$$y-f(0)=y-3=22x$$
 	Hence converting to slope-intercept form, we get the line
 	$$y=22x+3.$$
 	Then using figure \eqref{fig:averageslope1}, we can see we did a pretty good job here approximating, but I think we can do better.
-	
+
 	\begin{figure*}[h]
 	\centering
 		\resizebox{0.7\textwidth}{!}{\includegraphics{chapters/assets/RoC/averageslope1.png}}
 		\caption{}
 		\label{fig:averageslope1}
 	\end{figure*}
-	
+
 	Let's shrink our interval so we take the line that runs between the points $\paren{\frac{1}{2},f\paren{\frac{1}{2}}}$ and $\paren{\frac{3}{2},f\paren{\frac{3}{2}}}$.
 	Using the same formula as before, we get
 	$$\frac{f\paren{\frac{3}{2}}-f\paren{\frac{1}{2}}}{1.5-0.5}=\frac{\frac{183}{8}-\frac{37}{8}}{1}=\frac{73}{4}$$
@@ -65,7 +65,7 @@ In this section, let's try to take the approximation to 0. As seen in previous e
 	on the point $(1,f(1))$.
 	We know the formula for the approximate slope of a point generally is given by
 	$$\frac{f(x+h)-f(x)}{h}.$$
-	Now let's compute this as $h\to0$ in general in a limit. 
+	Now let's compute this as $h\to0$ in general in a limit.
 	$$\lim_{h\to0}\frac{f(x+h)-f(x)}{h}=\lim_{h\to0}\frac{((x+h)^2-(x+h))-(x^2-x)}{h}$$
 	$$=\lim_{h\to0}\frac{(x^2+2xh+h^2-(x+h))-(x^2-x)}{h}$$
 	$$=\lim_{h\to0}\frac{2xh+h^2-h}{h}$$
@@ -73,7 +73,7 @@ In this section, let's try to take the approximation to 0. As seen in previous e
 	$$=\lim_{h\to0}2x-h+1$$
 	Now since this is a nice smooth function, by plotting it, we can easily tell the limit as $h\to0$ is just whatever the function outputs, hence
 	$$=2x+1$$
-	This is our tangent line approximation, and if we substitute in $x=1$, we get the slope at this point is 
+	This is our tangent line approximation, and if we substitute in $x=1$, we get the slope at this point is
 	$$2(1)-1=1,$$
 	hence using the same technique as before, we get the tangent line is
 	$$y=x-1$$
@@ -128,7 +128,7 @@ Now armed with this, let's compute this formula in general.
 	\label{ex:gentan}
 \end{ex}
 
-In example \eqref{ex:gentan}, we only computed the slope if the polynomial was one term. To generalize to all polynomials, we need to know how these slopes add. 
+In example \eqref{ex:gentan}, we only computed the slope if the polynomial was one term. To generalize to all polynomials, we need to know how these slopes add.
 
 \begin{thm}
 	Suppose $f,g$ are both polynomials. If $f',g'$ are functions that produce the slope of their tangent line approximations, then the slope of the tangent line approximation of their sum is given as
@@ -180,18 +180,20 @@ Now with theorem \eqref{thm:dersum}, we can compute the slope of the tangent lin
 	Define $f:\mathcal{D}\to\real$, where $\mathcal{D}\subseteq\real$. If there exists an open interval $(a,b)\subseteq\mathcal{D}$ such that $c\in(a,b)$, is the minimum value, then $c$ is a \textbf{local minimum}.
 \end{define}
 
-The mathematical jargon might be difficult to navigate, but all the two definitions is saying is that if a point on a function function is a maximum on an interval, where this point is not on the boundary, then this point is a local maximum. Or as in figure \eqref{fig:localmax}
+The mathematical jargon might be difficult to navigate, but all the two definitions is saying is that if a point on a function is a maximum on an interval, where this point is not on the boundary, then this point is a local maximum. Or as in figure \eqref{fig:localmax}
 \begin{figure*}[h]
 	\centering
 	\begin{tikzpicture}
 		\begin{axis}
 			\addplot[blue, domain=-1.5:1.5,samples=50] {1/2*x^3-x};
-			
+
 		\end{axis}
 	\end{tikzpicture}
 	\caption{}
 	\label{fig:localmax}
 \end{figure*}
+
+... To be continued ...
 
 
 
